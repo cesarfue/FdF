@@ -6,7 +6,7 @@
 #    By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/03 18:46:17 by cefuente          #+#    #+#              #
-#    Updated: 2023/12/14 15:17:29 by cefuente         ###   ########.fr        #
+#    Updated: 2023/12/14 15:33:03 by cefuente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ SRCS	=	srcs/main.c
 OBJS	=	$(SRCS:.c=.o)
 HEADER	=	includes/fdf.h
 CC		=	cc
-FLAGS	=	-Wall -Wextra -Werror
+LFLAGS	=	-L./mlx -lmlx_Linux
+FLAGS	=	-Wall -Wextra -Werror -I./mlx
 RM		=	rm -rf
 LIBFT	=	./libft/libft.a
 NAME	=	FdF
@@ -25,10 +26,10 @@ $(LIBFT):
 	$(MAKE) -C ./libft
 
 ${NAME}    :    ${OBJS} ${LIBFT}
-	${CC} ${FLAGS} -o $@ $@
+	${CC} ${FLAGS} -o $@ ${LFLAGS}
 
 %.o        :    %.c ${HEADER}
-	${CC} ${FLAGS} -Imlx -c $< -o $@
+	${CC} ${FLAGS} -c $< -o $@
 
 clean    :
 	rm -f ${OBJS}

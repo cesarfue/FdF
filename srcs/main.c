@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2023/12/14 15:36:25 by cefuente         ###   ########.fr       */
+/*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
+/*   Updated: 2023/12/14 15:35:34 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "../includes/fdf.h"
 
-# include <../mlx/mlx.h>
+int	main(void)
+{
+	void	*mlx;
+	void	*mlx_win;
 
-#endif
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world");
+	mlx_loop(mlx);
+}
