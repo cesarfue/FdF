@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
+#    By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/03 18:46:17 by cefuente          #+#    #+#              #
-#    Updated: 2023/12/14 12:25:08 by cesar            ###   ########.fr        #
+#    Updated: 2023/12/14 15:17:29 by cefuente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ ${NAME}    :    ${OBJS} ${LIBFT}
 	${CC} ${FLAGS} -o $@ $@
 
 %.o        :    %.c ${HEADER}
-	${CC} ${FLAGS} -IMLX42 -c $< -o $@
+	${CC} ${FLAGS} -Imlx -c $< -o $@
 
 clean    :
 	rm -f ${OBJS}
