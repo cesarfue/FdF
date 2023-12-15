@@ -6,23 +6,11 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2023/12/15 17:19:31 by cefuente         ###   ########.fr       */
+/*   Updated: 2023/12/15 19:36:18 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-#define SIZE_X 1920;
-#define SIZE_Y 1080;
-#define MARGIN 100;
-
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -32,14 +20,14 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	put_grid(t_data img)
+void	put_grid(t_data img, t_map s_map)
 {
 	int	x;
 	int	y;
 
 	x = MARGIN;
 	y = MARGIN;
-	while (x++ < (1920 - 100))
+	while (x++ < 1920 - MARGIN)
 	{
 		my_mlx_pixel_put(&img, x, y, 0x4EB9B4);
 		if (x % 10 == 0)
@@ -50,7 +38,7 @@ void	put_grid(t_data img)
 	}
 }
 
-void	draw(void)
+void	draw(t_map s_map)
 {
 	void	*mlx;
 	void	*mlx_win;
@@ -60,7 +48,7 @@ void	draw(void)
 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Bruhbadihba");
 	img.img = mlx_new_image(mlx, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	put_grid(img); 
+	put_grid(img, s_map); 
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx); 
 }

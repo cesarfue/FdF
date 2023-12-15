@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
+#    By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/15 12:34:28 by cesar             #+#    #+#              #
-#    Updated: 2023/12/15 18:08:20 by cesar            ###   ########.fr        #
+#    Updated: 2023/12/15 18:56:02 by cefuente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 SRCS	=	srcs/main.c srcs/parsing.c srcs/draw.c
 OBJS	=	$(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 HEADER	=	includes/fdf.h
-CC		=	cc
+CC		=	cc -g 
 FLAGS	=	-Wall -Wextra
 RM		=	rm -rf
 AR		=	ar rcs
