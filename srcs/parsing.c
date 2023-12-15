@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2023/12/15 17:44:51 by cefuente         ###   ########.fr       */
+/*   Created: 2023/12/15 17:16:37 by cefuente          #+#    #+#             */
+/*   Updated: 2023/12/15 17:51:05 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "../includes/fdf.h"
 
-# include <../mlx_linux/mlx.h>
-# include <../libft/includes/libft.h>
-# include <../libft/includes/ft_printf.h>
-# include <../libft/includes/get_next_line.h>
-# include <fcntl.h>
+char	**parsing(char *file)
+{
+	int		fd;
+	int		i;
+	char	**map;
 
-char	**parsing(char *file);
-
-
-#endif
+	fd = open(file, O_RDONLY);
+	i = 0;
+	if (!fd)
+		quit("Invalid fd");
+	map = malloc (2 * sizeof(char)); 
+	if (!map)
+		quit("");
+	while (fd)
+	{
+		map[i] = get_next_line(fd); 
+		ft_printf("%s", map[i]);
+		i++;
+	}
+	return (map); 
+}

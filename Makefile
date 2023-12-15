@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
+#    By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/15 12:34:28 by cesar             #+#    #+#              #
-#    Updated: 2023/12/15 16:01:14 by cesar            ###   ########.fr        #
+#    Updated: 2023/12/15 17:33:41 by cefuente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-SRCS	=	srcs/main.c
+SRCS	=	srcs/main.c srcs/parsing.c srcs/draw.c
 OBJS	=	$(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 HEADER	=	includes/fdf.h
 CC		=	cc

@@ -5,19 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2023/12/14 15:35:34 by cefuente         ###   ########.fr       */
+/*   Created: 2023/12/15 17:18:31 by cefuente          #+#    #+#             */
+/*   Updated: 2023/12/15 17:22:01 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
-
-int	main(void)
+int	main(int argc, char **argv)
 {
-	void	*mlx;
-	void	*mlx_win;
+	char	**map;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world");
-	mlx_loop(mlx);
+	if (!argv[1] | !argv[2] | argc != 3)
+		quit("Invalid arguments"); 
+	map = parsing(argv[2]); 
 }
