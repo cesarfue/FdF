@@ -3,40 +3,49 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+         #
+#    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/03 18:46:17 by cefuente          #+#    #+#              #
-#    Updated: 2023/12/14 15:33:03 by cefuente         ###   ########.fr        #
+#    Created: 2023/12/15 12:34:28 by cesar             #+#    #+#              #
+#    Updated: 2023/12/15 16:01:14 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+
 SRCS	=	srcs/main.c
-OBJS	=	$(SRCS:.c=.o)
+OBJS	=	$(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 HEADER	=	includes/fdf.h
 CC		=	cc
-LFLAGS	=	-L./mlx -lmlx_Linux
-FLAGS	=	-Wall -Wextra -Werror -I./mlx
+FLAGS	=	-Wall -Wextra
 RM		=	rm -rf
+AR		=	ar rcs
 LIBFT	=	./libft/libft.a
 NAME	=	FdF
 
-all	:	$(NAME)
+all		:	$(NAME)
 
 $(LIBFT):
 	$(MAKE) -C ./libft
+	
+mlx	:
+	$(MAKE) -C ./mlx_linux
 
-${NAME}    :    ${OBJS} ${LIBFT}
-	${CC} ${FLAGS} -o $@ ${LFLAGS}
+$(NAME)	:	$(OBJS) $(LIBFT) mlx Makefile
+	$(CC) $(OBJS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
-%.o        :    %.c ${HEADER}
-	${CC} ${FLAGS} -c $< -o $@
+objs/%.o		: srcs/%.c $(HEADER)
+	@mkdir -p $(dir $@)
+	$(CC) $(FLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
-clean    :
-	rm -f ${OBJS}
+clean	:
+	${RM} ${OBJS}
+	$(MAKE) -C ./libft clean
+	$(MAKE) -C ./mlx_linux clean
 
-fclean    :    clean
-	rm -f ${NAME}
+fclean	:    clean
+	${RM} ${NAME}
+	$(MAKE) -C ./libft fclean
+	$(MAKE) -C ./mlx_linux clean
 
-re        :    fclean all
+re		:    fclean all
 
-.PHONY    :    all clean fclean re
+.PHONY	: all bonus clean fclean re
