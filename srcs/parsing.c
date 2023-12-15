@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:16:37 by cefuente          #+#    #+#             */
-/*   Updated: 2023/12/15 19:28:48 by cefuente         ###   ########.fr       */
+/*   Updated: 2023/12/15 20:24:32 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ t_map	parsing(t_map s_map)
 		ft_printf("%s", s_map.content[y]);
 		y++;
 	}
-	s_map.y = y;
+	s_map.ylen = y;
 	y = 0;
 	while (s_map.content[y][x] != '\n')
 		x++;
-	s_map.x = x;
-	ft_printf("y is %d, x is %d\n", s_map.y, s_map.y);
+	s_map.xlen = x;
+	ft_printf("y is %d, x is %d\n", s_map.ylen, s_map.xlen);
 	close(fd);
 	free(line); 
 	return (s_map); 

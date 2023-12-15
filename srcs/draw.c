@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2023/12/15 19:36:18 by cefuente         ###   ########.fr       */
+/*   Updated: 2023/12/15 20:32:35 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,25 @@ void	put_grid(t_data img, t_map s_map)
 {
 	int	x;
 	int	y;
+	int Ymax;
+	int Xmax;
+	int marg;
 
-	x = MARGIN;
-	y = MARGIN;
-	while (x++ < 1920 - MARGIN)
+	Ymax = IMGSIZE_Y;
+	Xmax = IMGSIZE_X;
+	marg = MARGIN;
+	y = marg;
+	x = marg;
+
+	while (y < Ymax)
 	{
-		my_mlx_pixel_put(&img, x, y, 0x4EB9B4);
-		if (x % 10 == 0)
+		while (x < Xmax)
 		{
-			while (y++ < (1080 - 100))
-				my_mlx_pixel_put(&img, x, y, 0x4EB9B4);
+			my_mlx_pixel_put(&img, x, y, 0x4EB9B4);
+			x++;
 		}
+		x = marg;
+		y += (Ymax / 10);
 	}
 }
 

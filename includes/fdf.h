@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2023/12/15 19:33:11 by cefuente         ###   ########.fr       */
+/*   Updated: 2023/12/15 20:34:11 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@
 # include <../libft/includes/get_next_line.h>
 # include <fcntl.h>
 
-#define SIZE_X 1920;
-#define SIZE_Y 1080;
-#define MARGIN 100;
+#define WINSIZE_Y 1080
+#define WINSIZE_X 1920
+#define IMGSIZE_Y (WINSIZE_Y * 0.9)
+#define IMGSIZE_X (WINSIZE_X * 0.9)
+#define MARGIN (WINSIZE_Y * 0.2)
 
 typedef struct	s_data
 {
@@ -32,13 +34,20 @@ typedef struct	s_data
 	int		endian;
 } t_data;
 
-typedef struct s_struct
+typedef struct s_map
 {
 	char	*file;
 	char	**content;
-	int		x;
-	int		y;
+	int		xlen;
+	int		ylen;
 } t_map;
+
+typedef struct s_point
+{
+	int	x;
+	int	y;
+	int	alt;
+} t_point; 
 
 t_map	parsing(t_map s_map);
 
