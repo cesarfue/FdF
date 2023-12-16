@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+         #
+#    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/03 18:46:17 by cefuente          #+#    #+#              #
-#    Updated: 2023/12/15 17:39:53 by cefuente         ###   ########.fr        #
+#    Updated: 2023/12/16 08:15:51 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,12 @@ SRCS	=	srcs/ft_atoi.c srcs/ft_bzero.c srcs/ft_calloc.c srcs/ft_isalnum.c srcs/ft
 	srcs/ft_substr.c srcs/ft_tolower.c srcs/ft_toupper.c \
 	srcs/ft_lstadd_back_bonus.c srcs/ft_lstadd_front_bonus.c srcs/ft_lstclear_bonus.c srcs/ft_lstdelone_bonus.c srcs/ft_lstiter_bonus.c srcs/ft_lstlast_bonus.c \
 	srcs/ft_lstmap_bonus.c srcs/ft_lstnew_bonus.c srcs/ft_lstsize_bonus.c \
-	srcs/quit.c \
+	srcs/quit.c srcs/ft_strndup.c \
 	srcs/printf/ft_printf.c srcs/printf/ft_numbers.c srcs/printf/ft_strings.c srcs/printf/ft_switch.c \
-	srcs/gnl/get_next_line.c srcs/gnl/get_next_line_utils.c
+	srcs/get_next_line.c \
 
 OBJS	=	$(patsubst srcs/%.c, objs/%.o, $(SRCS))
-HEADER    =    includes/libft.h includes/ft_printf.h includes/get_next_line.h 
+HEADER    =    includes/libft.h includes/ft_printf.h
 NAME    =    libft.a
 CC        =    cc
 AR        =    ar -rc

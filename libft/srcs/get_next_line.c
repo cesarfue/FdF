@@ -3,33 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 08:11:19 by cesar             #+#    #+#             */
-/*   Updated: 2023/12/15 17:52:04 by cefuente         ###   ########.fr       */
+/*   Updated: 2023/12/16 08:18:24 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/get_next_line.h"
+#include "../includes/libft.h"
 
-char	*get_next_line(int fd)
-{
-	static char	*rope;
-	char		*line;
-
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	rope = buf_to_rope(fd, rope);
-	if (!rope)
-		return (NULL);
-	line = rope_to_line(rope);
-	rope = get_next(rope);
-	if (!line)
-		return (NULL);
-	return (line);
-}
-
-char	*buf_to_rope(int fd, char *rope)
+static char	*buf_to_rope(int fd, char *rope)
 {
 	char	*buf;
 	char	*tmp;
@@ -57,7 +40,7 @@ char	*buf_to_rope(int fd, char *rope)
 	return (free(buf), rope);
 }
 
-char	*rope_to_line(char *rope)
+static char	*rope_to_line(char *rope)
 {
 	int		i;
 	char	*line;
@@ -73,7 +56,7 @@ char	*rope_to_line(char *rope)
 	return (line);
 }
 
-char	*get_next(char *rope)
+static char	*get_next(char *rope)
 {
 	char	*next_rope;
 
@@ -83,4 +66,21 @@ char	*get_next(char *rope)
 		return (free(rope), NULL);
 	next_rope = ft_strdup(ft_strchr(rope, '\n') + 1);
 	return (free(rope), next_rope);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*rope;
+	char		*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	rope = buf_to_rope(fd, rope);
+	if (!rope)
+		return (NULL);
+	line = rope_to_line(rope);
+	rope = get_next(rope);
+	if (!line)
+		return (NULL);
+	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 07:07:18 by cesar             #+#    #+#             */
-/*   Updated: 2023/12/13 08:16:07 by cesar            ###   ########.fr       */
+/*   Updated: 2023/12/16 07:59:46 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,6 @@ static void	*ft_free(char **splat)
 		free(splat[i++]);
 	free(splat);
 	return (NULL);
-}
-
-static char	*ft_strndup(char const *src, size_t n)
-{
-	size_t		i;
-	char		*dest;
-
-	i = 0;
-	while (src[i] && i < n)
-		i++;
-	dest = malloc((i + 1) * sizeof(char));
-	if (!dest)
-		return (NULL);
-	i = 0;
-	while (src[i] && i < n)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
 }
 
 static size_t	ft_countwords(char const *str, char c)
