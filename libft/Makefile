@@ -6,7 +6,7 @@
 #    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/03 18:46:17 by cefuente          #+#    #+#              #
-#    Updated: 2023/12/16 08:15:51 by cesar            ###   ########.fr        #
+#    Updated: 2023/12/16 17:04:52 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS	=	srcs/ft_atoi.c srcs/ft_bzero.c srcs/ft_calloc.c srcs/ft_isalnum.c srcs/ft
 OBJS	=	$(patsubst srcs/%.c, objs/%.o, $(SRCS))
 HEADER    =    includes/libft.h includes/ft_printf.h
 NAME    =    libft.a
-CC        =    cc
+CC        =    cc -g 
 AR        =    ar -rc
 FLAGS    =    -Wall -Wextra -Werror
 

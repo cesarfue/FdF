@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 10:20:14 by cefuente          #+#    #+#             */
-/*   Updated: 2023/12/13 08:36:09 by cesar            ###   ########.fr       */
+/*   Updated: 2023/12/16 17:28:48 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ ssize_t	ft_pf_putstr(char *s, ssize_t *p_ret)
 	size_t	i;
 
 	i = 0;
-	if (!s)
+	if (!s || !s[i])
 	{
-		if (write(1, "(null)", 6))
+		if (write(1, "(null)", 6) != -1)
 			return (*p_ret += 6);
 		else
 			return (*p_ret = -1);

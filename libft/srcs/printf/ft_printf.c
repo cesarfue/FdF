@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:21:56 by cesar             #+#    #+#             */
-/*   Updated: 2023/12/13 08:36:09 by cesar            ###   ########.fr       */
+/*   Updated: 2023/12/16 17:54:12 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,18 @@ int	ft_printf(const char *format, ...)
 	va_start(args, format);
 	ret = 0;
 	p_ret = &ret;
-	i = 0;
-	while (format[i] && ret != -1)
+	i = -1;
+	while (format[++i] && ret != -1)
 	{
 		if (format[i] == '%' && format[i + 1])
-			switch_strings(format[++i], args, p_ret);
+		{
+			if (!(switch_strings(format[++i], args, p_ret)))
+				return (-1);
+		}
 		else if (format[i] == '%' && !format[i + 1])
-			return (ret = -1);
+			return (-1);
 		else
 			ft_pf_putchar(format[i], p_ret);
-		i++;
 	}
 	va_end(args);
 	return (ret);

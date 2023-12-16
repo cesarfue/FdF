@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/cefuente/Cursus/FdF/srcs",
-      "program": "/home/cefuente/Cursus/FdF/srcs/build/Debug/outDebug",
+      "cwd": "/home/cesar/Cursus/FdF/libft/srcs/printf",
+      "program": "/home/cesar/Cursus/FdF/libft/srcs/printf/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
