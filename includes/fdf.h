@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2023/12/16 20:55:09 by cesar            ###   ########.fr       */
+/*   Updated: 2023/12/17 12:51:14 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,19 @@ typedef struct s_view
 	int		img_height;
 	int		margin_x;
 	int		margin_y;
+	int		unit_width;
+	int		unit_height;
 }	t_view;
 
 typedef struct s_map
 {
 	char	*file;
-	int		**content;
+	int		**data;
 	int		width;
 	int		height;
 }	t_map;
 
-void	def_view(t_view *s_view);
+void	def_view(t_view *s_view, t_map *s_map);
 void	cartographer(t_map *s_map);
 void	draw(t_view s_view, t_map s_map);
 

@@ -6,13 +6,13 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:16:37 by cefuente          #+#    #+#             */
-/*   Updated: 2023/12/16 20:57:37 by cesar            ###   ########.fr       */
+/*   Updated: 2023/12/17 12:51:33 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	def_view(t_view *s_view)
+void	def_view(t_view *s_view, t_map *s_map)
 {
 	s_view->win_width = WIN_WIDTH;
 	s_view->win_height = WIN_HEIGHT;
@@ -20,6 +20,8 @@ void	def_view(t_view *s_view)
 	s_view->img_height = s_view->win_height * 0.7;
 	s_view->margin_x = s_view->win_width * 0.3;
 	s_view->margin_y = s_view->win_height * 0.3;
+	s_view->unit_width = s_view->img_width * s_map->width;
+	s_view->unit_height = s_view->img_height * s_map->height;
 }
 
 int	*atoiverse(char **str, t_map *s_map)
@@ -56,15 +58,15 @@ void	cartographer(t_map *s_map)
 	y = 0;
 	if (fd == -1)
 		quit("Invalid fd");
-	s_map->content = NULL;
+	s_map->data = NULL;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		s_map->content = realloc(s_map->content, (y + 1) * sizeof(int *));
-		if (!s_map->content)
+		s_map->data = realloc(s_map->data, (y + 1) * sizeof(int *));
+		if (!s_map->data)
 			quit("Memory allocation failed >> cartographer");
 		splat_line = ft_split(line, ' ');
-		s_map->content[y++] = atoiverse(splat_line, s_map);
+		s_map->data[y++] = atoiverse(splat_line, s_map);
 		free(line);
 		line = get_next_line(fd);
 	}
