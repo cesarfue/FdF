@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2023/12/17 12:51:14 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/11 17:47:14 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <../libft/includes/libft.h>
 # include <../libft/includes/ft_printf.h>
 # include <fcntl.h>
+# include <math.h> 
 
 # ifndef WIN_WIDTH
 #  define WIN_WIDTH 1920
