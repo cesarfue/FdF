@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:16:37 by cefuente          #+#    #+#             */
-/*   Updated: 2023/12/17 12:51:33 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/12 18:13:30 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ void	def_view(t_view *s_view, t_map *s_map)
 {
 	s_view->win_width = WIN_WIDTH;
 	s_view->win_height = WIN_HEIGHT;
-	s_view->img_width = s_view->win_width * 0.7;
-	s_view->img_height = s_view->win_height * 0.7;
-	s_view->margin_x = s_view->win_width * 0.3;
-	s_view->margin_y = s_view->win_height * 0.3;
-	s_view->unit_width = s_view->img_width * s_map->width;
-	s_view->unit_height = s_view->img_height * s_map->height;
+	s_view->img_width = s_view->win_width * 0.8;
+	s_view->img_height = s_view->win_height * 0.8;
+	s_view->margin_x = s_view->win_width * 0.1;
+	s_view->margin_y = s_view->win_height * 0.1;
+	s_view->dotX = s_view->img_width / s_map->width;
+	s_view->dotY = s_view->img_height / s_map->height;
+	s_view->tile_width = s_view->dotX;
+	s_view->tile_height = s_view->dotY;
+	s_view->alt_scale = ALT_SCALE;
 }
 
 int	*atoiverse(char **str, t_map *s_map)

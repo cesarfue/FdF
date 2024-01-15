@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/11 17:47:14 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/12 17:59:36 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,15 @@
 # include <math.h> 
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 1920
+#  define WIN_WIDTH 2560
 # endif
 
 # ifndef WIN_HEIGHT 
-#  define WIN_HEIGHT 1080
+#  define WIN_HEIGHT 1600
+# endif
+
+# ifndef ALT_SCALE
+#  define ALT_SCALE 0.5
 # endif
 
 typedef struct s_data
@@ -44,8 +48,11 @@ typedef struct s_view
 	int		img_height;
 	int		margin_x;
 	int		margin_y;
-	int		unit_width;
-	int		unit_height;
+	int		dotX;
+	int		dotY;
+	int		tile_width;
+	int		tile_height;
+	int		alt_scale;
 }	t_view;
 
 typedef struct s_map
