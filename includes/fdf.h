@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/12 17:59:36 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/15 15:25:34 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,11 @@ typedef struct s_map
 {
 	char	*file;
 	int		**data;
+	int		**iso;
 	int		width;
 	int		height;
 }	t_map;
+
 
 void	def_view(t_view *s_view, t_map *s_map);
 void	cartographer(t_map *s_map);

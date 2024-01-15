@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:16:37 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/12 18:13:30 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/15 15:16:49 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	def_view(t_view *s_view, t_map *s_map)
 	s_view->dotY = s_view->img_height / s_map->height;
 	s_view->tile_width = s_view->dotX;
 	s_view->tile_height = s_view->dotY;
-	s_view->alt_scale = ALT_SCALE;
 }
 
 int	*atoiverse(char **str, t_map *s_map)
