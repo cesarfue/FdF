@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:16:37 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/16 09:16:08 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/17 14:14:07 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	def_dot(t_fdf *fdf)
 		x = 0;
 		y++;
 	}
-
 }
 
 int	*atoiverse(char **str, t_fdf *fdf)

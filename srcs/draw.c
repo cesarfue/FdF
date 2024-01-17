@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/16 10:54:13 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/17 14:17:04 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	px_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int line(t_fdf *fdf, int beginX, int beginY, int endX, int endY, int color)
+int line(t_img *img, t_dot a, t_dot b, int color)
 {
 	double	deltaX;
 	double	deltaY;
@@ -34,47 +34,22 @@ int line(t_fdf *fdf, int beginX, int beginY, int endX, int endY, int color)
 	double	pixelY;
 	int		pixels;
 	
-	deltaX = endX - beginX;
-	deltaY = endY - beginY;
-	pixelX = beginX;
-	pixelY = beginY;
+	deltaX = b.x - a.x;
+	deltaY = b.y - a.y;
+	pixelX = a.x;
+	pixelY = a.y;
 	pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
 	deltaX /= pixels;
 	deltaY /= pixels;
 	while (pixels)
 	{
-		px_put(fdf->img, pixelX, pixelY, color); 
+		px_put(img, pixelX, pixelY, color); 
 		pixelX += deltaX;
 		pixelY += deltaY; 
 		--pixels;
 	}
 	return (0);
 }
-
-// void	line(t_dot a, t_dot b, t_dot *param)
-// {
-// 	float	step_x;
-// 	float	step_y;
-// 	float	max;
-// 	int		color;
-
-// 	// set_param(&a, &b, param);
-// 	isometric(a, b);
-// 	step_x = b.x - a.x;
-// 	step_y = b.y - a.y;
-// 	// max = maxim(fmodule(step_x), fmodule(step_y));
-// 	step_x /= max;
-// 	step_y /= max;
-// 	color = set_color(b.z, a.z);
-// 	while ((int)(a.x - b.x) || (int)(a.y - b.y))
-// 	{
-// 		px_put(param, a.x, a.y, color);
-// 		a.x += step_x;
-// 		a.y += step_y;
-// 		if (a.x > param->win_x || a.y > param->win_y || a.y < 0 || a.x < 0)
-// 			break ;
-// 	}
-// }
 
 void is_that_bob_ross(t_fdf *fdf)
 {
@@ -93,7 +68,8 @@ void is_that_bob_ross(t_fdf *fdf)
 	{
 		while (xI < fdf->map->width)
 		{
-			line(fdf->dot[y][x], fdf->dot[y][x + 1])
+			line(fdf->img, fdf->dot[y][x], fdf->dot[y][x + 1], 0xFFFFFF);
+			line(fdf->img, fdf->dot[y][x], fdf->dot[y + 1][x], 0xFFFFFF);
 			x += fdf->opts->dotX;
 			xI++;
 		}
