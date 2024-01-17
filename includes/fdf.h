@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/17 15:05:30 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/17 18:13:06 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@
 #  define WIN_HEIGHT 1600
 # endif
 
-# ifndef ALT_SCALE
-#  define ALT_SCALE 0.5
+# ifndef SCALE
+#  define SCALE 0.5
 # endif
 
 typedef struct s_dot
 {
-	int	x;
-	int	y;
-	int	z;
+	float	x;
+	float	y;
+	float	z;
 }	t_dot;
 
 typedef struct s_img
@@ -65,20 +65,20 @@ typedef struct s_opts
 	int		margin_y;
 	int		dotX;
 	int		dotY;
-	int		tile_width;
-	int		tile_height;
-	int		alt_scale;
+	int		scale;
+	int		angle;
 }	t_opts;
 
 typedef struct s_fdf
 {
 	t_map	*map;
-	t_dot	**dot;
 	t_opts	*opts;
+	t_dot	**dot;
+	t_dot	**pos;
 }	t_fdf;
 
-void	def_view(t_fdf *fdf);
 void	cartographer(t_fdf *fdf);
+void	positions(t_fdf *fdf);
 void	init_mlx(t_fdf *fdf);
 
 #endif

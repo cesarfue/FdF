@@ -6,16 +6,30 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/17 15:40:58 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/17 18:17:09 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	isometric(t_dot *dot)
+float	absol(float i)
 {
-	dot->x = (dot->x - dot->y) * cos(0.5);
-	dot->y = (dot->x + dot->y) * sin(0.5) - dot->z;
+	if (i < 0)
+		return (-i);
+	return (i);
+}
+
+float	max(float x, float y)
+{
+	if (x >= y)
+		return (x);
+	return (y);
+}
+
+void	iso(t_dot *dot)
+{
+	dot->x = (dot->x - dot->y) * cos(0.8);
+	dot->y = (dot->x + dot->y) * sin(0.8) - dot->z;
 }
 
 void	px_put(t_img *img, int x, int y, int color)
@@ -26,27 +40,34 @@ void	px_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int line(t_img *img, t_dot a, t_dot b, int color)
+int line(t_opts *opts, t_img *img, t_dot pos, t_dot npos, int color)
 {
-	double	deltaX;
-	double	deltaY;
-	double	pixelX;
-	double	pixelY;
-	int		pixels;
+	float	delta_x;
+	float	delta_y;
+	float		px;
 	
-	deltaX = b.x - a.x;
-	deltaY = b.y - a.y;
-	pixelX = a.x;
-	pixelY = a.y;
-	pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
-	deltaX /= pixels;
-	deltaY /= pixels;
-	while (pixels)
+	iso(&pos);
+	iso(&npos);
+	delta_x = npos.x - pos.x;
+	delta_y = npos.y - pos.y;
+	// px = sqrt((delta_x * delta_x) + (delta_y * delta_y));
+	px = max(absol(delta_x), absol(delta_y));
+	delta_x /= px;
+	delta_y /= px;
+	// while (px)
+	// {
+	// 	px_put(img, pos.x, pos.y, color); 
+	// 	pos.x += delta_x;
+	// 	pos.y += delta_y; 
+	// 	--px;
+	// }
+	while ((int)(pos.x - npos.x) || (int)(pos.y - npos.y))
 	{
-		px_put(img, pixelX, pixelY, color); 
-		pixelX += deltaX;
-		pixelY += deltaY; 
-		--pixels;
+		px_put(img, pos.x, pos.y, color);
+		pos.x += delta_x;
+		pos.y += delta_y;
+		if (pos.x > opts->img_width || pos.y > opts->img_height || pos.y < 0 || pos.x < 0)
+			break ;
 	}
 	return (0);
 }
@@ -55,27 +76,19 @@ void is_that_bob_ross(t_fdf *fdf, t_img *img)
 {
 	int	x;
 	int	y;
-	int	xI;
-	int	yI;
 
-	x = fdf->opts->margin_x;
-	y = fdf->opts->margin_y;
-	xI = 0;
-	yI = 0;
-	while (yI < fdf->map->height)
+	x = 0;
+	y = 0;
+	while (y < fdf->map->height - 1)
 	{
-		while (xI < fdf->map->width)
+		while (x < fdf->map->width - 1)
 		{
-			ft_printf("a.x is %d, b.x is %d\n", dot[yI][xI], b.x);
-			line(img, fdf->dot[yI][xI], fdf->dot[yI][xI + 1], 0xFFFFFF);
-			line(img, fdf->dot[yI][xI], fdf->dot[yI + 1][xI], 0xFFFFFF);
-			x += fdf->opts->dotX;
-			xI++;
+			line(fdf->opts, img, fdf->pos[y][x], fdf->pos[y][x + 1], 0xFFFFFF);
+			line(fdf->opts, img, fdf->pos[y][x], fdf->pos[y + 1][x], 0xFFFFFF);
+			x++;
 		}
-		x = fdf->opts->margin_x;
-		y += fdf->opts->dotY;
-		xI = 0;
-		yI++;
+		x = 0;
+		y++;
 	}
 }
 
