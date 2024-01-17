@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:18:31 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/16 09:14:45 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/17 15:00:22 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	def_view(t_fdf *fdf)
 	fdf->opts->margin_y = fdf->opts->win_height * 0.1;
 	fdf->opts->dotX = fdf->opts->img_width / fdf->map->width;
 	fdf->opts->dotY = fdf->opts->img_height / fdf->map->height;
-	fdf->opts->tile_width = fdf->map->dotX;
-	fdf->opts->tile_height = fdf->map->dotY;
 }
 
 
@@ -31,12 +29,15 @@ void	def_view(t_fdf *fdf)
 int	main(int argc, char **argv)
 {
 	t_fdf	fdf;
-
+	
 	if (!argv[0] || !argv[1] || (argc != 2))
 		quit("Invalid arguments");
-	fdf.map.file = argv[1];
+	// fdf.img = malloc(sizeof(t_img));
+	fdf.map = malloc(sizeof(t_map));
+	fdf.opts = malloc(sizeof(t_opts));
+	fdf.map->file = argv[1];
 	cartographer(&fdf);
 	def_view(&fdf);
-	draw(fdf);
+	init_mlx(&fdf);
 	return (0);
 }

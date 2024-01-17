@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/17 14:17:04 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:40:58 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,24 @@ int line(t_img *img, t_dot a, t_dot b, int color)
 	return (0);
 }
 
-void is_that_bob_ross(t_fdf *fdf)
+void is_that_bob_ross(t_fdf *fdf, t_img *img)
 {
 	int	x;
 	int	y;
 	int	xI;
 	int	yI;
-	int iso_x;
-	int	iso_y;
 
 	x = fdf->opts->margin_x;
-	y = fdf->opts->margin_y; 
+	y = fdf->opts->margin_y;
 	xI = 0;
 	yI = 0;
 	while (yI < fdf->map->height)
 	{
 		while (xI < fdf->map->width)
 		{
-			line(fdf->img, fdf->dot[y][x], fdf->dot[y][x + 1], 0xFFFFFF);
-			line(fdf->img, fdf->dot[y][x], fdf->dot[y + 1][x], 0xFFFFFF);
+			ft_printf("a.x is %d, b.x is %d\n", dot[yI][xI], b.x);
+			line(img, fdf->dot[yI][xI], fdf->dot[yI][xI + 1], 0xFFFFFF);
+			line(img, fdf->dot[yI][xI], fdf->dot[yI + 1][xI], 0xFFFFFF);
 			x += fdf->opts->dotX;
 			xI++;
 		}
@@ -80,18 +79,19 @@ void is_that_bob_ross(t_fdf *fdf)
 	}
 }
 
-void	init_mlx(t_fdf fdf)
+void	init_mlx(t_fdf *fdf)
 {
 	void	*mlx;
 	void	*mlx_win;
 
+	t_img	img;
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, fdf.opts.win_width,
-			fdf.opts.win_height, "Fils de fer");
-	fdf.img = mlx_new_image(mlx, fdf.opts.win_width, fdf.opts.win_height);
-	fdf.img.addr = mlx_get_data_addr(fdf.img.img, &fdf.img.bits_per_pixel,
-			&fdf.img.line_length, &fdf.img.endian);
-	is_that_bob_ross(&fdf);
-	mlx_put_image_to_window(mlx, mlx_win, fdf.img.img, 0, 0);
+	mlx_win = mlx_new_window(mlx, fdf->opts->win_width,
+			fdf->opts->win_height, "Fils de fer");
+	img.img = mlx_new_image(mlx, fdf->opts->win_width, fdf->opts->win_height);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
+			&img.line_length, &img.endian);
+	is_that_bob_ross(fdf, &img);
+	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
 }

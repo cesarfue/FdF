@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/17 14:16:11 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:05:30 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 #  define ALT_SCALE 0.5
 # endif
 
-typedef s_dot
+typedef struct s_dot
 {
 	int	x;
 	int	y;
@@ -72,14 +72,13 @@ typedef struct s_opts
 
 typedef struct s_fdf
 {
-	s_img	img;
-	s_map	map;
-	s_dot	**dot;
-	s_opts	opts;
+	t_map	*map;
+	t_dot	**dot;
+	t_opts	*opts;
 }	t_fdf;
 
 void	def_view(t_fdf *fdf);
 void	cartographer(t_fdf *fdf);
-void	init_mlx(t_fdf fdf);
+void	init_mlx(t_fdf *fdf);
 
 #endif
