@@ -3,30 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:16:37 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/15 15:16:49 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/16 09:16:08 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	def_view(t_view *s_view, t_map *s_map)
+void	def_dot(t_fdf *fdf)
 {
-	s_view->win_width = WIN_WIDTH;
-	s_view->win_height = WIN_HEIGHT;
-	s_view->img_width = s_view->win_width * 0.8;
-	s_view->img_height = s_view->win_height * 0.8;
-	s_view->margin_x = s_view->win_width * 0.1;
-	s_view->margin_y = s_view->win_height * 0.1;
-	s_view->dotX = s_view->img_width / s_map->width;
-	s_view->dotY = s_view->img_height / s_map->height;
-	s_view->tile_width = s_view->dotX;
-	s_view->tile_height = s_view->dotY;
+	int	i;
+	int	y;
+	int	x;
+
+	i = 0;
+	y = 0;
+	x = 0;
+	fdf->dot = malloc(fdf->map->height * sizeof(s_dot *));
+	while (i < fdf->map->height)
+		fdf->dot[i++] = malloc(fdf->map->width * sizeof(s_dot));
+	while (y < fdf->map->height)
+	{
+		while (x < fdf->map->width)
+		{
+			fdf->dot[y][x].y = y;
+			fdf->dot[y][x].x = x;
+			fdf->dot[y][x].z = fdf->map->data[y][x]; 
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+
 }
 
-int	*atoiverse(char **str, t_map *s_map)
+int	*atoiverse(char **str, t_fdf *fdf)
 {
 	static int	bool = 1;
 	int			*ret;
@@ -43,36 +56,37 @@ int	*atoiverse(char **str, t_map *s_map)
 		ret[i] = ft_atoi(str[i]);
 	if (bool)
 	{
-		s_map->width = i - 1;
+		fdf->map->width = i - 1;
 		bool = 0;
 	}
 	return (ret);
 }
 
-void	cartographer(t_map *s_map)
+void	cartographer(t_fdf *fdf)
 {
 	int		fd;
 	int		y;
 	char	*line;
 	char	**splat_line;
 
-	fd = open(s_map->file, O_RDONLY);
+	fd = open(fdf->map->file, O_RDONLY);
 	y = 0;
 	if (fd == -1)
 		quit("Invalid fd");
-	s_map->data = NULL;
+	fdf->map->data = NULL;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		s_map->data = realloc(s_map->data, (y + 1) * sizeof(int *));
-		if (!s_map->data)
+		fdf->map->data = realloc(fdf->map->data, (y + 1) * sizeof(int *));
+		if (!fdf->map->data)
 			quit("Memory allocation failed >> cartographer");
 		splat_line = ft_split(line, ' ');
-		s_map->data[y++] = atoiverse(splat_line, s_map);
+		fdf->map->data[y++] = atoiverse(splat_line, fdf);
 		free(line);
 		line = get_next_line(fd);
 	}
-	s_map->height = y;
+	fdf->map->height = y;
 	close(fd);
 	free(line);
+	def_dot(fdf);
 }

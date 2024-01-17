@@ -3,23 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/15 15:50:50 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:54:13 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-// void	to_iso(t_map *s_map)
-// {
-// 	int	xI;
-// 	int	yI;
-// 	while (xI < s_map->wid)
-// }
+void	isometric(t_dot *dot)
+{
+	dot->x = (dot->x - dot->y) * cos(0.5);
+	dot->y = (dot->x + dot->y) * sin(0.5) - dot->z;
+}
 
-int draw_line(void *mlx, void *mlx_win, int beginX, int beginY, int endX, int endY, int color)
+void	px_put(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+int line(t_fdf *fdf, int beginX, int beginY, int endX, int endY, int color)
 {
 	double	deltaX;
 	double	deltaY;
@@ -36,7 +43,7 @@ int draw_line(void *mlx, void *mlx_win, int beginX, int beginY, int endX, int en
 	deltaY /= pixels;
 	while (pixels)
 	{
-		mlx_pixel_put(mlx, mlx_win, pixelX, pixelY, color); 
+		px_put(fdf->img, pixelX, pixelY, color); 
 		pixelX += deltaX;
 		pixelY += deltaY; 
 		--pixels;
@@ -44,33 +51,32 @@ int draw_line(void *mlx, void *mlx_win, int beginX, int beginY, int endX, int en
 	return (0);
 }
 
-// void	to_iso(int *iso_x, int *iso_y, t_view *s_view, t_map *s_map, int xI, int yI)
+// void	line(t_dot a, t_dot b, t_dot *param)
 // {
-// 	// int x;
-// 	// int	y;
+// 	float	step_x;
+// 	float	step_y;
+// 	float	max;
+// 	int		color;
 
-// 	// x = *iso_x;
-// 	// y = *iso_y;
-// 	if (xI >= 0 && xI < s_map->width && yI >= 0 && yI < s_map->height)
+// 	// set_param(&a, &b, param);
+// 	isometric(a, b);
+// 	step_x = b.x - a.x;
+// 	step_y = b.y - a.y;
+// 	// max = maxim(fmodule(step_x), fmodule(step_y));
+// 	step_x /= max;
+// 	step_y /= max;
+// 	color = set_color(b.z, a.z);
+// 	while ((int)(a.x - b.x) || (int)(a.y - b.y))
 // 	{
-// 		ft_printf("*iso_x = (%d - %d) * %d = %d\n*iso_y = (%d + %d) * %d - %d * %d = %d\n", xI, yI, s_view->tile_width / 2, (xI - yI) * s_view->tile_width / 2, xI, yI, s_view->tile_height / 2, s_view->alt_scale, s_map->data[yI][xI], (xI + yI) * s_view->tile_height / 2 - s_view->alt_scale * s_map->data[yI][xI]);
-// 		*iso_x = (xI - yI) * s_view->tile_width / 2;
-// 		*iso_y = (xI + yI) * s_view->tile_height / 2 - s_view->alt_scale * s_map->data[yI][xI];
+// 		px_put(param, a.x, a.y, color);
+// 		a.x += step_x;
+// 		a.y += step_y;
+// 		if (a.x > param->win_x || a.y > param->win_y || a.y < 0 || a.x < 0)
+// 			break ;
 // 	}
-// 	else
-// 		quit("Out-of bound error while converting to iso");
 // }
 
-void	to_iso(int x, int y, int xI, int yI, int *iso_x, int *iso_y, t_map *s_map)
-{
-	int z;
-
-	z = s_map->data[yI][xI];
-	*iso_x = (x - z) / sqrt(2);
-	*iso_y = (x + (2 * y) + z) / sqrt(6);
-}
-
-void put_grid(void *mlx, void *mlx_win, t_map *s_map, t_view *s_view)
+void is_that_bob_ross(t_fdf *fdf)
 {
 	int	x;
 	int	y;
@@ -79,42 +85,37 @@ void put_grid(void *mlx, void *mlx_win, t_map *s_map, t_view *s_view)
 	int iso_x;
 	int	iso_y;
 
-	x = s_view->margin_x;
-	y = s_view->margin_y; 
+	x = fdf->opts->margin_x;
+	y = fdf->opts->margin_y; 
 	xI = 0;
 	yI = 0;
-	while (yI < s_map->height)
+	while (yI < fdf->map->height)
 	{
-		while (xI < s_map->width)
+		while (xI < fdf->map->width)
 		{
-			to_iso(x, y, xI, yI, &iso_x, &iso_y, s_map);
-			ft_printf("iso_x = %d || iso_y = %d || iso_x + s_view->dotX = %d || iso_y + s_view->dotY = %d\n", iso_x, iso_y, iso_x + s_view->dotX, iso_y + s_view->dotY);
-			draw_line(mlx, mlx_win, iso_x, iso_y, iso_x, iso_y + s_view->dotY, 0xFFFFFF);
-			draw_line(mlx, mlx_win, iso_x, iso_y, iso_x + s_view->dotX, iso_y, 0xFFFFFF);
-			x += s_view->dotX;
+			line(fdf->dot[y][x], fdf->dot[y][x + 1])
+			x += fdf->opts->dotX;
 			xI++;
 		}
-		x = s_view->margin_x;
-		y += s_view->dotY;
+		x = fdf->opts->margin_x;
+		y += fdf->opts->dotY;
 		xI = 0;
 		yI++;
 	}
 }
 
-void	draw(t_view s_view, t_map s_map)
+void	init_mlx(t_fdf fdf)
 {
 	void	*mlx;
 	void	*mlx_win;
-	t_data	img;
 
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, s_view.win_width,
-			s_view.win_height, "Fils de fer");
-	img.img = mlx_new_image(mlx, s_view.win_width, s_view.win_height);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-			&img.line_length, &img.endian);
-	convert_map(&s_map);
-	put_grid(mlx, mlx_win, &s_map, &s_view);
-	// mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+	mlx_win = mlx_new_window(mlx, fdf.opts.win_width,
+			fdf.opts.win_height, "Fils de fer");
+	fdf.img = mlx_new_image(mlx, fdf.opts.win_width, fdf.opts.win_height);
+	fdf.img.addr = mlx_get_data_addr(fdf.img.img, &fdf.img.bits_per_pixel,
+			&fdf.img.line_length, &fdf.img.endian);
+	is_that_bob_ross(&fdf);
+	mlx_put_image_to_window(mlx, mlx_win, fdf.img.img, 0, 0);
 	mlx_loop(mlx);
 }
