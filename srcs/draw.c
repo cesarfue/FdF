@@ -6,16 +6,17 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/17 18:17:09 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/18 13:55:22 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include <stdio.h>
 
 float	absol(float i)
 {
 	if (i < 0)
-		return (-i);
+		return (i * -1);
 	return (i);
 }
 
@@ -28,8 +29,8 @@ float	max(float x, float y)
 
 void	iso(t_dot *dot)
 {
-	dot->x = (dot->x - dot->y) * cos(0.8);
-	dot->y = (dot->x + dot->y) * sin(0.8) - dot->z;
+	dot->x = (dot->x - dot->y) * cos(0.4);
+	dot->y = (dot->x + dot->y) * sin(0.4) - dot->z;
 }
 
 void	px_put(t_img *img, int x, int y, int color)
@@ -50,24 +51,17 @@ int line(t_opts *opts, t_img *img, t_dot pos, t_dot npos, int color)
 	iso(&npos);
 	delta_x = npos.x - pos.x;
 	delta_y = npos.y - pos.y;
-	// px = sqrt((delta_x * delta_x) + (delta_y * delta_y));
+	printf("delta_x is %f = %f - %f || delta_y is %f = %f - %f \n", delta_x, npos.x, pos.x, delta_y, npos.y, npos.x);
 	px = max(absol(delta_x), absol(delta_y));
 	delta_x /= px;
 	delta_y /= px;
-	// while (px)
-	// {
-	// 	px_put(img, pos.x, pos.y, color); 
-	// 	pos.x += delta_x;
-	// 	pos.y += delta_y; 
-	// 	--px;
-	// }
 	while ((int)(pos.x - npos.x) || (int)(pos.y - npos.y))
 	{
 		px_put(img, pos.x, pos.y, color);
 		pos.x += delta_x;
 		pos.y += delta_y;
-		if (pos.x > opts->img_width || pos.y > opts->img_height || pos.y < 0 || pos.x < 0)
-			break ;
+		// if (pos.x > opts->img_width || pos.y > opts->img_height || pos.y < 0 || pos.x < 0)
+		// 	break ;
 	}
 	return (0);
 }

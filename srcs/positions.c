@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:00:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/17 18:16:39 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/18 13:49:32 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	def_view(t_fdf *fdf)
 	fdf->opts->margin_y = fdf->opts->win_height * 0.2;
 	fdf->opts->dotX = fdf->opts->img_width / fdf->map->width;
 	fdf->opts->dotY = fdf->opts->img_height / fdf->map->height;
-	fdf->opts->angle = 0.5239;
+	fdf->opts->angle = 0.5;
 }
 
 void	def_dot(t_fdf *fdf)

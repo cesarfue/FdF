@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/17 18:13:06 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/17 18:20:59 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # endif
 
 # ifndef SCALE
-#  define SCALE 0.5
+#  define SCALE 1
 # endif
 
 typedef struct s_dot
