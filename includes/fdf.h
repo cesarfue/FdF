@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/17 18:20:59 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/18 15:37:27 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,19 @@
 # endif
 
 # ifndef SCALE
-#  define SCALE 1
+#  define SCALE 0.6
 # endif
 
-typedef struct s_dot
+# ifndef ALT_SCALE
+#  define ALT_SCALE 2
+# endif
+
+typedef struct s_pos
 {
 	float	x;
 	float	y;
 	float	z;
-}	t_dot;
+}	t_pos;
 
 typedef struct s_img
 {
@@ -66,15 +70,15 @@ typedef struct s_opts
 	int		dotX;
 	int		dotY;
 	int		scale;
-	int		angle;
+	float	angle;
+	int		alt_scale;
 }	t_opts;
 
 typedef struct s_fdf
 {
 	t_map	*map;
 	t_opts	*opts;
-	t_dot	**dot;
-	t_dot	**pos;
+	t_pos	**pos;
 }	t_fdf;
 
 void	cartographer(t_fdf *fdf);

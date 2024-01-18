@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/18 13:55:22 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/18 15:57:59 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@ float	max(float x, float y)
 	return (y);
 }
 
-void	iso(t_dot *dot)
-{
-	dot->x = (dot->x - dot->y) * cos(0.4);
-	dot->y = (dot->x + dot->y) * sin(0.4) - dot->z;
-}
-
 void	px_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
@@ -41,17 +35,15 @@ void	px_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int line(t_opts *opts, t_img *img, t_dot pos, t_dot npos, int color)
+int line(t_opts *opts, t_img *img, t_pos pos, t_pos npos, int color)
 {
 	float	delta_x;
 	float	delta_y;
 	float		px;
 	
-	iso(&pos);
-	iso(&npos);
 	delta_x = npos.x - pos.x;
 	delta_y = npos.y - pos.y;
-	printf("delta_x is %f = %f - %f || delta_y is %f = %f - %f \n", delta_x, npos.x, pos.x, delta_y, npos.y, npos.x);
+	printf("pos.x = %f, npos.x = %f || pos.y = %f, npos.y = %f\n", pos.x, npos.x, pos.y, npos.y);
 	px = max(absol(delta_x), absol(delta_y));
 	delta_x /= px;
 	delta_y /= px;
