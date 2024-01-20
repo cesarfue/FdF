@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/18 15:37:27 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/19 18:11:58 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <fcntl.h>
 # include <math.h> 
 
+# include <stdio.h>
+
 # ifndef WIN_WIDTH
 #  define WIN_WIDTH 2560
 # endif
@@ -28,11 +30,15 @@
 # endif
 
 # ifndef SCALE
-#  define SCALE 0.6
+#  define SCALE 0.5
 # endif
 
 # ifndef ALT_SCALE
 #  define ALT_SCALE 2
+# endif
+
+# ifndef ANGLE 
+#  define ANGLE 0.9
 # endif
 
 typedef struct s_pos
@@ -40,6 +46,7 @@ typedef struct s_pos
 	float	x;
 	float	y;
 	float	z;
+	int		color;
 }	t_pos;
 
 typedef struct s_img
@@ -63,14 +70,21 @@ typedef struct s_opts
 {
 	int		win_width;
 	int		win_height;
-	int		img_width;
-	int		img_height;
-	int		margin_x;
-	int		margin_y;
-	int		dotX;
-	int		dotY;
-	int		scale;
+	float	img_width;
+	float	img_height;
+	float	step;
 	float	angle;
+	float	min_x;
+	float	max_x;
+	float	min_y;
+	float	max_y;
+	int		min_z;
+	int		max_z;
+	float	height_offset;
+	float	scaled_step;
+	int		scale;
+	float	scale_factor;
+	int		auto_scale;
 	int		alt_scale;
 }	t_opts;
 
@@ -81,8 +95,18 @@ typedef struct s_fdf
 	t_pos	**pos;
 }	t_fdf;
 
+void	define_view(t_fdf *fdf);
 void	cartographer(t_fdf *fdf);
-void	positions(t_fdf *fdf);
+void	alloc_positions(t_fdf *fdf);
 void	init_mlx(t_fdf *fdf);
+float	absol(float i);
+
+void	calc_min_max(t_pos pos, t_opts *opts);
+void	define_scale(t_fdf *fdf);
+void	scale_positions(t_fdf *fdf);
+void	define_view(t_fdf *fdf);
+void	iso(t_pos *pos, float angle);
+void	positions(t_fdf *fdf);
+void	colors(t_opts *opts, t_pos *pos);
 
 #endif

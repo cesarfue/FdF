@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/18 15:57:59 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/19 18:08:45 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,27 @@ void	px_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int line(t_opts *opts, t_img *img, t_pos pos, t_pos npos, int color)
+int line(t_opts *opts, t_img *img, t_pos pos, t_pos npos)
 {
 	float	delta_x;
 	float	delta_y;
 	float		px;
 	
+	// (void)opts;
 	delta_x = npos.x - pos.x;
 	delta_y = npos.y - pos.y;
-	printf("pos.x = %f, npos.x = %f || pos.y = %f, npos.y = %f\n", pos.x, npos.x, pos.y, npos.y);
+	// printf("pos.x = %f, npos.x = %f || pos.y = %f, npos.y = %f\n", pos.x, npos.x, pos.y, npos.y);
 	px = max(absol(delta_x), absol(delta_y));
 	delta_x /= px;
 	delta_y /= px;
 	while ((int)(pos.x - npos.x) || (int)(pos.y - npos.y))
 	{
-		px_put(img, pos.x, pos.y, color);
+		if (pos.x > opts->win_width || pos.y > opts->win_height || pos.y < 0 || pos.x < 0)
+			break ;
+		colors(opts, &pos);
+		px_put(img, pos.x, pos.y, pos.color);
 		pos.x += delta_x;
 		pos.y += delta_y;
-		// if (pos.x > opts->img_width || pos.y > opts->img_height || pos.y < 0 || pos.x < 0)
-		// 	break ;
 	}
 	return (0);
 }
@@ -69,8 +71,17 @@ void is_that_bob_ross(t_fdf *fdf, t_img *img)
 	{
 		while (x < fdf->map->width - 1)
 		{
-			line(fdf->opts, img, fdf->pos[y][x], fdf->pos[y][x + 1], 0xFFFFFF);
-			line(fdf->opts, img, fdf->pos[y][x], fdf->pos[y + 1][x], 0xFFFFFF);
+			// if (!fdf->pos[y][x + 1].x || !fdf->pos[y + 1][x].x)
+			// {
+			// 	printf("y is %d, x is %d", y, x);
+			// 	// write(1, "ho", 2);
+			// 	break;
+			// }
+			// if (fdf->pos[y][x + 1].x < fdf->opts->win_width && fdf->pos[y][x + 1].y < fdf->opts->win_width)
+				line(fdf->opts, img, fdf->pos[y][x], fdf->pos[y][x + 1]);
+			// if (fdf->pos[y + 1][x].y < fdf->opts->win_height && fdf->pos[y + 1][x].x < fdf->opts->win_height)
+				line(fdf->opts, img, fdf->pos[y][x], fdf->pos[y + 1][x]);
+			// printf("y is %d, x is %d\n", y, x);
 			x++;
 		}
 		x = 0;

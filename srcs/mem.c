@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mem.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/15 17:18:31 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/18 18:32:26 by cesar            ###   ########.fr       */
+/*   Created: 2024/01/18 17:03:48 by cesar             #+#    #+#             */
+/*   Updated: 2024/01/18 17:04:31 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int	main(int argc, char **argv)
+void alloc_positions(t_fdf *fdf)
 {
-	t_fdf	fdf;
-	
-	if (!argv[0] || !argv[1] || (argc != 2))
-		quit("Invalid arguments");
-	// fdf.img = malloc(sizeof(t_img));
-	fdf.map = malloc(sizeof(t_map));
-	fdf.opts = malloc(sizeof(t_opts));
-	fdf.map->file = argv[1];
-	cartographer(&fdf);
-	define_view(&fdf);
-	positions(&fdf);
-	init_mlx(&fdf);
-	return (0);
+	int	i;
+
+	i = 0;
+	fdf->pos = malloc(fdf->map->height * sizeof(t_pos *));
+	if (!fdf->pos)
+		quit("alloc faild -> pos");
+	while (i < fdf->map->height)
+	{
+		fdf->pos[i] = malloc(fdf->map->width * sizeof(t_pos));
+		if (!fdf->pos[i])
+			quit("alloc faild -> pos");
+		i++;
+	}
 }
