@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:00:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/19 17:41:16 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/22 16:23:32 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	define_view(t_fdf *fdf)
 	fdf->opts->img_width = fdf->opts->win_width * SCALE;
 	fdf->opts->img_height = fdf->opts->win_height * SCALE;
 	fdf->opts->step = fdf->opts->img_width / fdf->map->width;
+	fdf->opts->view_x = VIEW_X;
+	fdf->opts->view_y = VIEW_Y; 
 }
 
 void	iso(t_pos *pos, float angle) 			/* Isometric conversion */

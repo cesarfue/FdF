@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/22 15:21:33 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/22 16:33:00 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@
 # endif
 
 # ifndef SCALE
-#  define SCALE 2
+#  define SCALE 0.8
 # endif
 
 # ifndef ALT_SCALE
-#  define ALT_SCALE 0.8
+#  define ALT_SCALE 5
 # endif
 
 # ifndef ANGLE 
@@ -88,12 +88,10 @@ typedef struct s_opts
 	float	max_y;
 	int		min_z;
 	int		max_z;
-	float	height_offset;
-	float	scaled_step;
 	int		scale;
-	float	scale_factor;
-	int		auto_scale;
 	int		alt_scale;
+	int		view_x;
+	int		view_y;
 }	t_opts;
 
 typedef struct s_fdf
@@ -108,7 +106,7 @@ void	cartographer(t_fdf *fdf);
 void	alloc_positions(t_fdf *fdf);
 void	init_mlx(t_fdf *fdf);
 float	absol(float i);
-
+float	max(float x, float y);
 void	calc_min_max(t_pos pos, t_opts *opts);
 void	define_scale(t_fdf *fdf);
 void	scale_positions(t_fdf *fdf);
@@ -117,8 +115,7 @@ void	iso(t_pos *pos, float angle);
 void	positions(t_fdf *fdf);
 void	colors(t_opts *opts, t_pos *pos);
 void	gradient(t_pos *pos, t_pos *npos, float i, float px);
-float	max(float x, float y);
-float	absol(float i);
+int		key_events(int key, t_opts *opts);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/22 15:20:39 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/22 16:42:52 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,8 @@ void is_that_bob_ross(t_fdf *fdf, t_img *img)
 	{
 		while (x < fdf->map->width - 1)
 		{
-			// if (!fdf->pos[y][x + 1].x || !fdf->pos[y + 1][x].x)
-			// {
-			// 	printf("y is %d, x is %d", y, x);
-			// 	// write(1, "ho", 2);
-			// 	break;
-			// }
-			// if (fdf->pos[y][x + 1].x < fdf->opts->win_width && fdf->pos[y][x + 1].y < fdf->opts->win_width)
-				line(fdf->opts, img, fdf->pos[y][x], fdf->pos[y][x + 1]);
-			// if (fdf->pos[y + 1][x].y < fdf->opts->win_height && fdf->pos[y + 1][x].x < fdf->opts->win_height)
-				line(fdf->opts, img, fdf->pos[y][x], fdf->pos[y + 1][x]);
-			// printf("y is %d, x is %d\n", y, x);
+			line(fdf->opts, img, fdf->pos[y][x], fdf->pos[y][x + 1]);
+			line(fdf->opts, img, fdf->pos[y][x], fdf->pos[y + 1][x]);
 			x++;
 		}
 		x = 0;
@@ -91,6 +82,7 @@ void	init_mlx(t_fdf *fdf)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
 	is_that_bob_ross(fdf, &img);
+	// mlx_key_hook(mlx_win, key_events, &fdf->opts);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
 }
