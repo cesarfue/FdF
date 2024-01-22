@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/19 18:11:58 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/22 15:21:33 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,23 @@
 # endif
 
 # ifndef SCALE
-#  define SCALE 0.5
+#  define SCALE 2
 # endif
 
 # ifndef ALT_SCALE
-#  define ALT_SCALE 2
+#  define ALT_SCALE 0.8
 # endif
 
 # ifndef ANGLE 
 #  define ANGLE 0.9
+# endif
+
+# ifndef VIEW_Y 
+#  define VIEW_Y 100
+# endif
+
+# ifndef VIEW_X
+#  define VIEW_X 500
 # endif
 
 typedef struct s_pos
@@ -108,5 +116,10 @@ void	define_view(t_fdf *fdf);
 void	iso(t_pos *pos, float angle);
 void	positions(t_fdf *fdf);
 void	colors(t_opts *opts, t_pos *pos);
+void	gradient(t_pos *pos, t_pos *npos, float i, float px);
+float	max(float x, float y);
+float	absol(float i);
+
+
 
 #endif

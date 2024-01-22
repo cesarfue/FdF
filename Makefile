@@ -6,12 +6,12 @@
 #    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/15 12:34:28 by cesar             #+#    #+#              #
-#    Updated: 2024/01/19 16:31:19 by cesar            ###   ########.fr        #
+#    Updated: 2024/01/22 15:21:47 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-SRCS	=	srcs/main.c srcs/parsing.c srcs/draw.c srcs/positions.c srcs/mem.c srcs/scale.c
+SRCS	=	srcs/main.c srcs/parsing.c srcs/draw.c srcs/positions.c srcs/mem.c srcs/scale.c srcs/colors.c srcs/events.c srcs/utils.c
 OBJS	=	$(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 HEADER	=	includes/fdf.h
 CC		=	cc -g 
