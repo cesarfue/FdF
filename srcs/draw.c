@@ -6,14 +6,12 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/22 16:42:52 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/23 15:51:41 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include <stdio.h>
-
-
 
 void	px_put(t_img *img, int x, int y, int color)
 {
@@ -21,6 +19,12 @@ void	px_put(t_img *img, int x, int y, int color)
 
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
+}
+
+void	iso(t_pos *pos, float angle) 	/* Isometric conversion */
+{
+	pos->x = (pos->x - pos->y) * cos(angle);
+	pos->y = (pos->x + pos->y) * sin(angle) - pos->z;
 }
 
 int line(t_opts *opts, t_img *img, t_pos pos, t_pos npos)
@@ -49,40 +53,24 @@ int line(t_opts *opts, t_img *img, t_pos pos, t_pos npos)
 	return (0);
 }
 
-void is_that_bob_ross(t_fdf *fdf, t_img *img)
+void is_that_bob_ross(t_fdf *fdf)
 {
 	int	x;
 	int	y;
 
 	x = 0;
 	y = 0;
-	while (y < fdf->map->height - 1)
+	while (y < fdf->map->height)
 	{
-		while (x < fdf->map->width - 1)
+		while (x < fdf->map->width)
 		{
-			line(fdf->opts, img, fdf->pos[y][x], fdf->pos[y][x + 1]);
-			line(fdf->opts, img, fdf->pos[y][x], fdf->pos[y + 1][x]);
+			line(fdf->opts, fdf->img, fdf->pos[y][x], fdf->pos[y][x + 1]);
+            line(fdf->opts, fdf->img, fdf->pos[y][x], fdf->pos[y + 1][x]);
 			x++;
 		}
 		x = 0;
 		y++;
 	}
+	mlx_put_image_to_window(fdf->img->mlx, fdf->img->mlx_win, fdf->img->img, 0, 0);
 }
 
-void	init_mlx(t_fdf *fdf)
-{
-	void	*mlx;
-	void	*mlx_win;
-
-	t_img	img;
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, fdf->opts->win_width,
-			fdf->opts->win_height, "Fils de fer");
-	img.img = mlx_new_image(mlx, fdf->opts->win_width, fdf->opts->win_height);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-			&img.line_length, &img.endian);
-	is_that_bob_ross(fdf, &img);
-	// mlx_key_hook(mlx_win, key_events, &fdf->opts);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
-}

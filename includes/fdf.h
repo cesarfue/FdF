@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/22 16:33:00 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/23 15:36:07 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,6 @@
 #  define WIN_HEIGHT 1600
 # endif
 
-# ifndef SCALE
-#  define SCALE 0.8
-# endif
-
-# ifndef ALT_SCALE
-#  define ALT_SCALE 5
-# endif
-
-# ifndef ANGLE 
-#  define ANGLE 0.9
-# endif
-
-# ifndef VIEW_Y 
-#  define VIEW_Y 100
-# endif
-
-# ifndef VIEW_X
-#  define VIEW_X 500
-# endif
-
 typedef struct s_pos
 {
 	float	x;
@@ -64,6 +44,8 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	void	*mlx;
+	void	*mlx_win;
 }	t_img;
 
 typedef struct s_map
@@ -90,8 +72,9 @@ typedef struct s_opts
 	int		max_z;
 	int		scale;
 	int		alt_scale;
-	int		view_x;
-	int		view_y;
+	float	view_x;
+	float	view_y;
+	int		first_time;
 }	t_opts;
 
 typedef struct s_fdf
@@ -99,23 +82,23 @@ typedef struct s_fdf
 	t_map	*map;
 	t_opts	*opts;
 	t_pos	**pos;
+	t_img	*img;
 }	t_fdf;
 
-void	define_view(t_fdf *fdf);
+void	init_opts(t_fdf *fdf);
 void	cartographer(t_fdf *fdf);
 void	alloc_positions(t_fdf *fdf);
 void	init_mlx(t_fdf *fdf);
 float	absol(float i);
 float	max(float x, float y);
 void	calc_min_max(t_pos pos, t_opts *opts);
-void	define_scale(t_fdf *fdf);
-void	scale_positions(t_fdf *fdf);
-void	define_view(t_fdf *fdf);
 void	iso(t_pos *pos, float angle);
 void	positions(t_fdf *fdf);
 void	colors(t_opts *opts, t_pos *pos);
 void	gradient(t_pos *pos, t_pos *npos, float i, float px);
-int		key_events(int key, t_opts *opts);
+int		key_events(int key, t_fdf *fdf);
+void	is_that_bob_ross(t_fdf *fdf);
+void	free_tab(t_fdf *fdf);
 
 
 

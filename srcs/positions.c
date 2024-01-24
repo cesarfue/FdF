@@ -6,58 +6,73 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:00:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/22 16:23:32 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/23 15:52:46 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	define_view(t_fdf *fdf)
+void	calc_min_max(t_pos pos, t_opts *opts)
 {
-	fdf->opts->win_width = WIN_WIDTH;
-	fdf->opts->win_height = WIN_HEIGHT;
-	fdf->opts->angle = ANGLE;
-	fdf->opts->alt_scale = ALT_SCALE;
-	fdf->opts->img_width = fdf->opts->win_width * SCALE;
-	fdf->opts->img_height = fdf->opts->win_height * SCALE;
-	fdf->opts->step = fdf->opts->img_width / fdf->map->width;
-	fdf->opts->view_x = VIEW_X;
-	fdf->opts->view_y = VIEW_Y; 
+	if (pos.x < opts->min_x)
+		opts->min_x = pos.x;
+	if (pos.x > opts->max_x)
+		opts->max_x = pos.x;
+	if (pos.y < opts->min_y)
+		opts->min_y = pos.y;
+	if (pos.y > opts->max_y)
+		opts->max_y = pos.y;
+	if (pos.z < opts->min_z)
+		opts->min_z = pos.z;
+	if (pos.z > opts->max_z)
+		opts->max_z = pos.z;
 }
 
-void	iso(t_pos *pos, float angle) 			/* Isometric conversion */
+void	adjust(t_fdf *fdf)
 {
-	pos->x = (pos->x - pos->y) * cos(angle);
-	pos->y = (pos->x + pos->y) * sin(angle) - pos->z;
+	if (fdf->opts->first_time == 0)
+		return ;
+	fdf->opts->view_y += absol(fdf->opts->min_y);
+	fdf->opts->view_x += absol(fdf->opts->min_x);
+	fdf->opts->first_time = 0;
+	positions(fdf);
 }
 
-void	positions(t_fdf *fdf)				/* Calculates default isometric positions and calls scale functions*/
+void	scale(t_opts *opts, t_pos *pos)
+{
+	if (opts->first_time == 1)
+		return ;
+	pos->y += opts->view_y;
+	pos->x += opts->view_x;
+}
+
+void	base_pos(t_pos *pos, t_opts *opts, t_map *map, int y, int x)
+{
+	pos->y = y * opts->step;
+	pos->x = x * opts->step;
+	pos->z = map->data[y][x] * opts->alt_scale;
+}
+
+void	positions(t_fdf *fdf)
 {
 	int	y;
 	int	x;
 
-	fdf->opts->min_x = __FLT_MAX__;
-	fdf->opts->max_x = __FLT_MIN__;
-	fdf->opts->min_y = __FLT_MAX__;
-	fdf->opts->max_y = __FLT_MIN__;
-	fdf->opts->min_z = __INT_MAX__;
-	fdf->opts->max_z = 0;
 	y = 0;
 	x = 0;
-	alloc_positions(fdf);
 	while (y < fdf->map->height) 				
 	{
 		while (x < fdf->map->width)
 		{
-			fdf->pos[y][x].y = y * fdf->opts->step;
-			fdf->pos[y][x].x = x * fdf->opts->step;
-			fdf->pos[y][x].z = fdf->map->data[y][x] * fdf->opts->alt_scale;
+			base_pos(&fdf->pos[y][x], fdf->opts, fdf->map, y, x);
 			iso(&fdf->pos[y][x], fdf->opts->angle);
+			scale(fdf->opts, &fdf->pos[y][x]);
+			colors(fdf->opts, &fdf->pos[y][x]);
 			calc_min_max(fdf->pos[y][x], fdf->opts);
 			x++;
 		}
 		x = 0;
 		y++;
 	}
-	scale_positions(fdf);
+	adjust(fdf);
 }
