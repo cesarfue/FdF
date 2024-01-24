@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/24 16:00:07 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/24 17:02:08 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int line(t_opts *opts, t_img *img, t_pos pos, t_pos npos)
 	
 	delta_x = npos.x - pos.x;
 	delta_y = npos.y - pos.y;
+	if (!npos.x || !npos.y)
+		return (0); 
 	px = max(absol(delta_x), absol(delta_y));
 	delta_x /= px;
 	delta_y /= px;
@@ -60,9 +62,9 @@ void is_that_bob_ross(t_fdf *fdf)
 
 	x = 0;
 	y = 0;
-	while (y < fdf->map->height - 1)
+	while (y < fdf->map->height)
 	{
-		while (x < fdf->map->width - 1)
+		while (x < fdf->map->width)
 		{
 			line(fdf->opts, fdf->img, fdf->pos[y][x], fdf->pos[y][x + 1]);
             line(fdf->opts, fdf->img, fdf->pos[y][x], fdf->pos[y + 1][x]);

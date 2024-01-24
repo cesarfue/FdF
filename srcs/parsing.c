@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:16:37 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/17 16:30:11 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/24 16:38:43 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ int	*atoiverse(char **str, t_fdf *fdf)
 		fdf->map->width = i - 1;
 		bool = 0;
 	}
+	i = 0;
+	while (str[i])
+		free(str[i++]);
+	free(str);
 	return (ret);
 }
 

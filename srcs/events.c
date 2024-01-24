@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:12:58 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/24 16:17:15 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/24 17:04:53 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	close_window(t_fdf *fdf)
 	mlx_destroy_image(fdf->img->mlx, fdf->img->img);
 	mlx_clear_window(fdf->img->mlx, fdf->img->mlx_win);
 	mlx_destroy_window(fdf->img->mlx, fdf->img->mlx_win);
-	free_pos(fdf); 
-	free_tab(fdf->map->data, fdf->map);
+	free_tab((void **)fdf->pos); 
+	free_tab((void **)fdf->map->data);
 	free(fdf->img);
 	free(fdf->map);
 	free(fdf->opts);
@@ -64,15 +64,14 @@ int	view_changed(int key, t_fdf *fdf)
 	if (key == 65289)
 		return (fdf->opts->angle -= 0.1, 1);
 	if (key == 49)
-		return (fdf->opts->alt_scale -= 2, printf("%d\n", fdf->opts->alt_scale), 1);
+		return (fdf->opts->alt_scale -= 2, 1);
 	if (key == 50)
-		return (fdf->opts->alt_scale += 2, printf("%d\n", fdf->opts->alt_scale), 1); 
+		return (fdf->opts->alt_scale += 2, 1); 
 	return (0); 
 }
 
 int	key_events(int key, t_fdf *fdf)
 {
-	printf("key is %d\n", key); 
 	if (view_changed(key, fdf) == 1)
 		new_window(fdf);
 	else if (escaped(key) == 1)
