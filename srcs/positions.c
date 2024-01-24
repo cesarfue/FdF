@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   positions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:00:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/23 15:52:46 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/24 16:19:19 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,22 @@ void	calc_min_max(t_pos pos, t_opts *opts)
 
 void	adjust(t_fdf *fdf)
 {
-	if (fdf->opts->first_time == 0)
+	if (fdf->opts->loops == 1)
 		return ;
 	fdf->opts->view_y += absol(fdf->opts->min_y);
 	fdf->opts->view_x += absol(fdf->opts->min_x);
-	fdf->opts->first_time = 0;
+	fdf->opts->loops++;
 	positions(fdf);
 }
 
 void	scale(t_opts *opts, t_pos *pos)
 {
-	if (opts->first_time == 1)
+	if (opts->loops == 0)
 		return ;
 	pos->y += opts->view_y;
 	pos->x += opts->view_x;
+	// printf("hello, view_x is %f and view_y is %f and loop is %d\n", opts->view_x, opts->view_y, opts->loops);
+
 }
 
 void	base_pos(t_pos *pos, t_opts *opts, t_map *map, int y, int x)
@@ -60,6 +62,7 @@ void	positions(t_fdf *fdf)
 
 	y = 0;
 	x = 0;
+	fdf->opts->step = fdf->opts->img_width / fdf->map->width;
 	while (y < fdf->map->height) 				
 	{
 		while (x < fdf->map->width)

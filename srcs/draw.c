@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/23 15:51:41 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/24 16:00:07 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void is_that_bob_ross(t_fdf *fdf)
 
 	x = 0;
 	y = 0;
-	while (y < fdf->map->height)
+	while (y < fdf->map->height - 1)
 	{
-		while (x < fdf->map->width)
+		while (x < fdf->map->width - 1)
 		{
 			line(fdf->opts, fdf->img, fdf->pos[y][x], fdf->pos[y][x + 1]);
             line(fdf->opts, fdf->img, fdf->pos[y][x], fdf->pos[y + 1][x]);

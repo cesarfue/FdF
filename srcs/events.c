@@ -3,38 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:12:58 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/23 16:01:38 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/24 16:17:15 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int	key_events(int key, t_fdf *fdf)
+void	close_window(t_fdf *fdf)
 {
-	if (key == 113)
-		fdf->opts->view_x -= 80;
-	if (key == 114)
-		 fdf->opts->view_x += 80;
-	if (key == 111)
-		fdf->opts->view_y -= 80;
-	if (key == 116)
-		fdf->opts->view_y += 80;
 	mlx_destroy_image(fdf->img->mlx, fdf->img->img);
 	mlx_clear_window(fdf->img->mlx, fdf->img->mlx_win);
-	// fdf->img->img = mlx_new_image(fdf->img->mlx, 2000, 2000);
-	// if (!fdf->img->img)
-	// 	quit("mlx failed in key hook.c");
-	// fdf->img->addr = mlx_get_data_addr(fdf->img->img, 
-	// &fdf->img->bits_per_pixel, 
-	// &fdf->img->line_length, &fdf->img->endian);
-	// init_mlx(fdf);
+	mlx_destroy_window(fdf->img->mlx, fdf->img->mlx_win);
+	free_pos(fdf); 
+	free_tab(fdf->map->data, fdf->map);
+	free(fdf->img);
+	free(fdf->map);
+	free(fdf->opts);
+	// free(fdf);
+	exit(0);
+}
+
+void	new_window(t_fdf *fdf)
+{
+	mlx_destroy_image(fdf->img->mlx, fdf->img->img);
+	mlx_clear_window(fdf->img->mlx, fdf->img->mlx_win);
+	fdf->img->img = mlx_new_image(fdf->img->mlx, fdf->opts->win_width, fdf->opts->win_height);
+	if (!fdf->img->img)
+		quit("Error : img pointer failed");
+	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bits_per_pixel, &fdf->img->line_length, &fdf->img->endian);
 	positions(fdf);
 	is_that_bob_ross(fdf);
+}
+
+int	escaped(int key)
+{
+	if (key == 65307)
+		return (1); 
 	return (0);
 }
 
+int	view_changed(int key, t_fdf *fdf)
+{
+	if (key == 65363)
+		return (fdf->opts->view_x -= 80, 1);
+	if (key == 65361)
+		return (fdf->opts->view_x += 80, 1);
+	if (key == 65364)
+		return (fdf->opts->view_y -= 80, 1);
+	if (key == 65362)
+		return (fdf->opts->view_y += 80, 1);
+	if (key == 45)
+		return (fdf->opts->img_width -= 100, 1);
+	if (key == 61)
+		return (fdf->opts->img_width += 100, 1);
+	if (key == 32)
+		return (fdf->opts->angle += 0.1, 1);
+	if (key == 65289)
+		return (fdf->opts->angle -= 0.1, 1);
+	if (key == 49)
+		return (fdf->opts->alt_scale -= 2, printf("%d\n", fdf->opts->alt_scale), 1);
+	if (key == 50)
+		return (fdf->opts->alt_scale += 2, printf("%d\n", fdf->opts->alt_scale), 1); 
+	return (0); 
+}
 
-
+int	key_events(int key, t_fdf *fdf)
+{
+	printf("key is %d\n", key); 
+	if (view_changed(key, fdf) == 1)
+		new_window(fdf);
+	else if (escaped(key) == 1)
+		close_window(fdf); 
+	return (0);
+}

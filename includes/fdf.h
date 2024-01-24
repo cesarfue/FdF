@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/23 15:36:07 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/24 15:56:58 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # include <stdio.h>
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 2560
+#  define WIN_WIDTH 3840
 # endif
 
 # ifndef WIN_HEIGHT 
-#  define WIN_HEIGHT 1600
+#  define WIN_HEIGHT 2160
 # endif
 
 typedef struct s_pos
@@ -74,7 +74,7 @@ typedef struct s_opts
 	int		alt_scale;
 	float	view_x;
 	float	view_y;
-	int		first_time;
+	int		loops;
 }	t_opts;
 
 typedef struct s_fdf
@@ -98,7 +98,8 @@ void	colors(t_opts *opts, t_pos *pos);
 void	gradient(t_pos *pos, t_pos *npos, float i, float px);
 int		key_events(int key, t_fdf *fdf);
 void	is_that_bob_ross(t_fdf *fdf);
-void	free_tab(t_fdf *fdf);
+void	free_pos(t_fdf *fdf);
+void	free_tab(int **data, t_map *map);
 
 
 

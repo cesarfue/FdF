@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:18:31 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/23 15:50:26 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/24 15:45:24 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	init_opts(t_fdf *fdf)
 	fdf->opts->alt_scale = 5;
 	fdf->opts->img_width = fdf->opts->win_width * fdf->opts->scale;
 	fdf->opts->img_height = fdf->opts->win_height * fdf->opts->scale;
-	fdf->opts->step = fdf->opts->img_width / fdf->map->width;
-	fdf->opts->first_time = 1;
+	fdf->opts->loops = 0;
 	fdf->opts->min_x = __FLT_MAX__;
 	fdf->opts->max_x = __FLT_MIN__;
 	fdf->opts->min_y = __FLT_MAX__;
@@ -43,7 +42,7 @@ void	init_mlx(t_fdf *fdf)
 	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bits_per_pixel,
 			&fdf->img->line_length, &fdf->img->endian);
 	is_that_bob_ross(fdf);
-	mlx_hook(fdf->img->mlx_win, 2, 0, key_events, fdf);
+	mlx_key_hook(fdf->img->mlx_win, key_events, fdf);
 	mlx_loop(fdf->img->mlx);
 }
 
@@ -61,6 +60,5 @@ int	main(int argc, char **argv)
 	init_opts(&fdf);
 	positions(&fdf);
 	init_mlx(&fdf);
-
 	return (0);
 }

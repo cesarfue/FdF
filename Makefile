@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
+#    By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/15 12:34:28 by cesar             #+#    #+#              #
-#    Updated: 2024/01/22 15:21:47 by cesar            ###   ########.fr        #
+#    Updated: 2024/01/24 15:47:26 by cefuente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRCS	=	srcs/main.c srcs/parsing.c srcs/draw.c srcs/positions.c srcs/mem.c srcs/s
 OBJS	=	$(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 HEADER	=	includes/fdf.h
 CC		=	cc -g 
-FLAGS	=	-Wall -Wextra -Werror
+FLAGS	=	-Wall -Wextra -Werror 
 RM		=	rm -rf
 AR		=	ar rcs
 LIBFT	=	./libft/libft.a
@@ -36,7 +36,7 @@ objs/%.o		: srcs/%.c $(HEADER)
 	@mkdir -p $(dir $@)
 	$(CC) $(FLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
-clean	:
+clean	:e
 	${RM} ${OBJS}
 	$(MAKE) -C ./libft clean
 	$(MAKE) -C ./mlx_linux clean
