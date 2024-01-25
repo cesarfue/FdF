@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mem.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:03:48 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/24 17:13:33 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:27:47 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void alloc_positions(t_fdf *fdf)
 	fdf->pos = malloc(fdf->map->height * sizeof(t_pos *));
 	if (!fdf->pos)
 		quit("alloc faild -> pos");
-	while (i <= fdf->map->height)
+	while (i < fdf->map->height)
 	{
 		fdf->pos[i] = malloc(fdf->map->width * sizeof(t_pos));
 		if (!fdf->pos[i])
@@ -34,7 +34,7 @@ void free_tab(void **tab)
 	int	i;
 
 	i = 0;
-	while (tab[i] != NULL)
+	while (tab[i])
 		free(tab[i++]);
 	free(tab);
 }

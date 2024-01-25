@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:16:37 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/24 16:38:43 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:18:44 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	cartographer(t_fdf *fdf)
 		splat_line = ft_split(line, ' ');
 		fdf->map->data[y++] = atoiverse(splat_line, fdf);
 		free(line);
+		free(splat_line);
 		line = get_next_line(fd);
 	}
 	fdf->map->height = y;

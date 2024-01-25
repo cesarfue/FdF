@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/24 17:02:08 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:29:50 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	px_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	iso(t_pos *pos, float angle) 	/* Isometric conversion */
+void	iso(t_pos *pos, float angle)
 {
 	pos->x = (pos->x - pos->y) * cos(angle);
 	pos->y = (pos->x + pos->y) * sin(angle) - pos->z;
@@ -44,7 +44,7 @@ int line(t_opts *opts, t_img *img, t_pos pos, t_pos npos)
 	i = 0;
 	while ((int)(pos.x - npos.x) || (int)(pos.y - npos.y))
 	{
-		if (pos.x > opts->win_width || pos.y > opts->win_height || pos.y < 0 || pos.x < 0)
+		if (!pos.x || !pos.y || pos.x > opts->win_width || pos.y > opts->win_height || pos.y < 0 || pos.x < 0)
 			break ;
 		gradient(&pos, &npos, i, px);
 		px_put(img, pos.x, pos.y, pos.color);

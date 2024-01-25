@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/24 16:47:08 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:06:08 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # include <stdio.h>
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 3840
+#  define WIN_WIDTH 2560
 # endif
 
 # ifndef WIN_HEIGHT 
-#  define WIN_HEIGHT 2160
+#  define WIN_HEIGHT 16002
 # endif
 
 typedef struct s_pos

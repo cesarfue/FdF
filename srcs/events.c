@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:12:58 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/24 17:04:53 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:22:23 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	close_window(t_fdf *fdf)
 	free(fdf->img);
 	free(fdf->map);
 	free(fdf->opts);
-	// free(fdf);
+	free(fdf);
 	exit(0);
 }
 
