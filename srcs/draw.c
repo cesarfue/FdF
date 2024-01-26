@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/25 14:29:50 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/25 17:01:31 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ int line(t_opts *opts, t_img *img, t_pos pos, t_pos npos)
 	
 	delta_x = npos.x - pos.x;
 	delta_y = npos.y - pos.y;
-	if (!npos.x || !npos.y)
-		return (0); 
+	// if (!npos.x || !npos.y)
+	// 	return (0); 
 	px = max(absol(delta_x), absol(delta_y));
 	delta_x /= px;
 	delta_y /= px;
 	i = 0;
 	while ((int)(pos.x - npos.x) || (int)(pos.y - npos.y))
 	{
-		if (!pos.x || !pos.y || pos.x > opts->win_width || pos.y > opts->win_height || pos.y < 0 || pos.x < 0)
+		if (pos.x > opts->win_width || pos.y > opts->win_height || pos.y < 0 || pos.x < 0)
 			break ;
 		gradient(&pos, &npos, i, px);
 		px_put(img, pos.x, pos.y, pos.color);
@@ -66,8 +66,10 @@ void is_that_bob_ross(t_fdf *fdf)
 	{
 		while (x < fdf->map->width)
 		{
-			line(fdf->opts, fdf->img, fdf->pos[y][x], fdf->pos[y][x + 1]);
-            line(fdf->opts, fdf->img, fdf->pos[y][x], fdf->pos[y + 1][x]);
+			if (x + 1 < fdf->map->width)
+                line(fdf->opts, fdf->img, fdf->pos[y][x], fdf->pos[y][x + 1]);
+ 			if (y + 1 < fdf->map->height)
+                line(fdf->opts, fdf->img, fdf->pos[y][x], fdf->pos[y + 1][x]);
 			x++;
 		}
 		x = 0;

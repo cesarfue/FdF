@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:12:29 by cefuente          #+#    #+#             */
-/*   Updated: 2023/12/16 08:19:43 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/26 13:25:51 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,7 @@ char	*get_next_line(int fd);
 
 void	quit(char *quit_msg);
 char	*ft_strndup(char const *src, size_t n);
+void	*ft_realloc(void *ptr, size_t size);
+
 
 #endif
