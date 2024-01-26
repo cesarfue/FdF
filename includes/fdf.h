@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/26 14:46:16 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:12:57 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,12 @@
 # include <fcntl.h>
 # include <math.h> 
 
-# include <stdio.h>
-
 # ifndef WIN_WIDTH
 #  define WIN_WIDTH 2560
 # endif
 
 # ifndef WIN_HEIGHT 
-#  define WIN_HEIGHT 16002
+#  define WIN_HEIGHT 1600
 # endif
 
 typedef struct s_pos
@@ -98,6 +96,6 @@ void	colors(t_opts *opts, t_pos *pos);
 void	gradient(t_pos *pos, t_pos *npos, float i, float px);
 int		key_events(int key, t_fdf *fdf);
 void	is_that_bob_ross(t_fdf *fdf);
-void	free_tab(void **tab);
+void	free_tab(void **tab, int size);
 
 #endif
