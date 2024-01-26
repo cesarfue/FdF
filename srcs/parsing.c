@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:16:37 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/25 14:18:44 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/26 14:38:21 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	*atoiverse(char **str, t_fdf *fdf)
 		ret[i] = ft_atoi(str[i]);
 	if (bool)
 	{
-		fdf->map->width = i - 1;
+		fdf->map->width = i;
 		bool = 0;
 	}
 	i = 0;
@@ -60,7 +60,6 @@ void	cartographer(t_fdf *fdf)
 		splat_line = ft_split(line, ' ');
 		fdf->map->data[y++] = atoiverse(splat_line, fdf);
 		free(line);
-		free(splat_line);
 		line = get_next_line(fd);
 	}
 	fdf->map->height = y;

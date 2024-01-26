@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/25 14:06:08 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/26 14:46:16 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,6 @@ void	colors(t_opts *opts, t_pos *pos);
 void	gradient(t_pos *pos, t_pos *npos, float i, float px);
 int		key_events(int key, t_fdf *fdf);
 void	is_that_bob_ross(t_fdf *fdf);
-// void	free_pos(t_fdf *fdf);
-// void	free_tab(int **data, t_map *map);
-void free_tab(void **tab);
-
-
-
+void	free_tab(void **tab);
 
 #endif

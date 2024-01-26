@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:00:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/24 16:19:19 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:43:33 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,13 @@ void	scale(t_opts *opts, t_pos *pos)
 		return ;
 	pos->y += opts->view_y;
 	pos->x += opts->view_x;
-	// printf("hello, view_x is %f and view_y is %f and loop is %d\n", opts->view_x, opts->view_y, opts->loops);
-
 }
 
-void	base_pos(t_pos *pos, t_opts *opts, t_map *map, int y, int x)
+void	base_pos(t_pos *pos, t_fdf *fdf, int y, int x)
 {
-	pos->y = y * opts->step;
-	pos->x = x * opts->step;
-	pos->z = map->data[y][x] * opts->alt_scale;
+	pos->y = y * fdf->opts->step;
+	pos->x = x * fdf->opts->step;
+	pos->z = fdf->map->data[y][x] * fdf->opts->alt_scale;
 }
 
 void	positions(t_fdf *fdf)
@@ -63,11 +61,11 @@ void	positions(t_fdf *fdf)
 	y = 0;
 	x = 0;
 	fdf->opts->step = fdf->opts->img_width / fdf->map->width;
-	while (y < fdf->map->height) 				
+	while (y < fdf->map->height)
 	{
 		while (x < fdf->map->width)
 		{
-			base_pos(&fdf->pos[y][x], fdf->opts, fdf->map, y, x);
+			base_pos(&fdf->pos[y][x], fdf, y, x);
 			iso(&fdf->pos[y][x], fdf->opts->angle);
 			scale(fdf->opts, &fdf->pos[y][x]);
 			colors(fdf->opts, &fdf->pos[y][x]);

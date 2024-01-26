@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:12:58 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/25 14:22:23 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/26 14:45:10 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	close_window(t_fdf *fdf)
 	mlx_destroy_image(fdf->img->mlx, fdf->img->img);
 	mlx_clear_window(fdf->img->mlx, fdf->img->mlx_win);
 	mlx_destroy_window(fdf->img->mlx, fdf->img->mlx_win);
-	free_tab((void **)fdf->pos); 
+	free_tab((void **)fdf->pos);
 	free_tab((void **)fdf->map->data);
 	free(fdf->img);
 	free(fdf->map);
@@ -30,10 +30,12 @@ void	new_window(t_fdf *fdf)
 {
 	mlx_destroy_image(fdf->img->mlx, fdf->img->img);
 	mlx_clear_window(fdf->img->mlx, fdf->img->mlx_win);
-	fdf->img->img = mlx_new_image(fdf->img->mlx, fdf->opts->win_width, fdf->opts->win_height);
+	fdf->img->img = mlx_new_image(fdf->img->mlx,
+			fdf->opts->win_width, fdf->opts->win_height);
 	if (!fdf->img->img)
 		quit("Error : img pointer failed");
-	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bits_per_pixel, &fdf->img->line_length, &fdf->img->endian);
+	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bits_per_pixel,
+			&fdf->img->line_length, &fdf->img->endian);
 	positions(fdf);
 	is_that_bob_ross(fdf);
 }
@@ -41,7 +43,7 @@ void	new_window(t_fdf *fdf)
 int	escaped(int key)
 {
 	if (key == 65307)
-		return (1); 
+		return (1);
 	return (0);
 }
 
@@ -66,8 +68,8 @@ int	view_changed(int key, t_fdf *fdf)
 	if (key == 49)
 		return (fdf->opts->alt_scale -= 2, 1);
 	if (key == 50)
-		return (fdf->opts->alt_scale += 2, 1); 
-	return (0); 
+		return (fdf->opts->alt_scale += 2, 1);
+	return (0);
 }
 
 int	key_events(int key, t_fdf *fdf)
@@ -75,6 +77,6 @@ int	key_events(int key, t_fdf *fdf)
 	if (view_changed(key, fdf) == 1)
 		new_window(fdf);
 	else if (escaped(key) == 1)
-		close_window(fdf); 
+		close_window(fdf);
 	return (0);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mem.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:03:48 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/25 14:27:47 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/26 14:38:15 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void alloc_positions(t_fdf *fdf)
+void	alloc_positions(t_fdf *fdf)
 {
 	int	i;
 
@@ -29,7 +29,7 @@ void alloc_positions(t_fdf *fdf)
 	}
 }
 
-void free_tab(void **tab)
+void	free_tab(void **tab)
 {
 	int	i;
 

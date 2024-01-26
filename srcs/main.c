@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:18:31 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/24 15:45:24 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:40:51 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_opts(t_fdf *fdf)
 	fdf->opts->win_width = WIN_WIDTH;
 	fdf->opts->win_height = WIN_HEIGHT;
 	fdf->opts->view_x = 0;
-	fdf->opts->view_y = 0; 
+	fdf->opts->view_y = 0;
 	fdf->opts->angle = 0.8;
 	fdf->opts->scale = 1;
 	fdf->opts->alt_scale = 5;
@@ -38,7 +38,8 @@ void	init_mlx(t_fdf *fdf)
 	fdf->img->mlx = mlx_init();
 	fdf->img->mlx_win = mlx_new_window(fdf->img->mlx, fdf->opts->win_width,
 			fdf->opts->win_height, "Fils de fer");
-	fdf->img->img = mlx_new_image(fdf->img->mlx, fdf->opts->win_width, fdf->opts->win_height);
+	fdf->img->img = mlx_new_image(fdf->img->mlx,
+			fdf->opts->win_width, fdf->opts->win_height);
 	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bits_per_pixel,
 			&fdf->img->line_length, &fdf->img->endian);
 	is_that_bob_ross(fdf);
@@ -49,7 +50,7 @@ void	init_mlx(t_fdf *fdf)
 int	main(int argc, char **argv)
 {
 	t_fdf	fdf;
-	
+
 	if (!argv[0] || !argv[1] || (argc != 2))
 		quit("Invalid arguments");
 	fdf.img = malloc(sizeof(t_img));
