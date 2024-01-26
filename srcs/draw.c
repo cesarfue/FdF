@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/26 15:12:28 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:41:56 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 void	px_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
-
+ 
+	if (x > WIN_WIDTH || x < 0 || y > WIN_HEIGHT || y < 0)
+		return ;
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
@@ -42,9 +44,9 @@ int	line(t_opts *opts, t_img *img, t_pos pos, t_pos npos)
 	i = 0;
 	while ((int)(pos.x - npos.x) || (int)(pos.y - npos.y))
 	{
-		if (pos.x > opts->win_width || pos.y > opts->win_height
-			|| pos.y < 0 || pos.x < 0)
-			break ;
+		// if (pos.x > opts->win_width || pos.y > opts->win_height
+		// 	|| pos.y < 0 || pos.x < 0)
+		// 	break ;
 		gradient(&pos, &npos, i, px);
 		px_put(img, pos.x, pos.y, pos.color);
 		pos.x += delta_x;

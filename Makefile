@@ -3,22 +3,22 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
+#    By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/15 12:34:28 by cesar             #+#    #+#              #
-#    Updated: 2024/01/26 13:34:36 by cesar            ###   ########.fr        #
+#    Updated: 2024/01/26 16:19:40 by cefuente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-SRCS	=	srcs/main.c srcs/parsing.c srcs/draw.c srcs/positions.c srcs/mem.c srcs/scale.c srcs/colors.c srcs/events.c srcs/utils.c
+SRCS	=	srcs/main.c srcs/parsing.c srcs/draw.c srcs/positions.c srcs/mem.c srcs/colors.c srcs/events.c srcs/utils.c
 OBJS	=	$(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 HEADER	=	includes/fdf.h
 CC		=	cc -g 
-FLAGS	=	-Wall -Wextra -fsanitize=address
+FLAGS	=	-Wall -Wextra
 RM		=	rm -rf
 AR		=	ar rcs
-LIBFT	=	./libft/libft.a
+LIBFT	=	libft/libft.a
 NAME	=	FdF
 
 all		:	$(NAME)
@@ -30,9 +30,9 @@ mlx	:
 	$(MAKE) -C ./mlx_linux
 
 $(NAME)	:	$(OBJS) $(LIBFT) mlx Makefile
-	$(CC) $(FLAGS) $(OBJS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -no-pie -o $(NAME) $(LIBFT)
+	$(CC) $(OBJS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -no-pie -o $(NAME) $(LIBFT)
 
-objs/%.o		: srcs/%.c $(HEADER)
+objs/%.o		: srcs/%.c $(HEADER) $(LIBFT)
 	@mkdir -p $(dir $@)
 	$(CC) $(FLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
