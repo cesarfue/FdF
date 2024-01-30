@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:24:37 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/30 13:21:31 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/30 14:54:46 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	*ft_realloc(void *ptr, size_t size)
 	else if (ptr == NULL)
 		return (ret);
 	old_size = sizeof(ret);
-	printf("size is %ld\n", old_size);
 	if (size <= old_size)
 		return (ret);
 	ft_memcpy(ret, ptr, size);
