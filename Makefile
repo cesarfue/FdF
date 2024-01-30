@@ -6,44 +6,59 @@
 #    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/15 12:34:28 by cesar             #+#    #+#              #
-#    Updated: 2024/01/29 16:16:45 by cesar            ###   ########.fr        #
+#    Updated: 2024/01/30 13:51:45 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-SRCS			=	srcs/main.c srcs/parsing.c srcs/draw.c srcs/positions.c srcs/mem.c \
-	srcs/colors.c srcs/events.c srcs/utils.c
-OBJS			=	$(patsubst srcs/%.c, objs/%.o, $(SRCS))
-CC				=	cc -g
-FLAGS			=	-Wall -Wextra
-INCLUDES		=	-Iincludes -Ilibft
-LIBFT_DIR		=	./libft
-MLX_INCLUDES	=	-Imlx_linux -I/usr/include 
-MLX_DIR			=	./mlx_linux
-MLX_LINKS		=	-lmlx_Linux -lXext -lX11 -lm -lz
-RM				=	rm -r
+SRCS			=	main.c parsing.c draw.c positions.c mem.c \
+	colors.c events.c utils.c
+SRCS_DIR		=	srcs
+OBJS_DIR		=	objs
+CC				=	cc
+FLAGS			=	-Wall -Wextra -g 
+RM				=	rm -rf
 NAME			=	FdF
+DEPS_FLAGS		=	-MMD -MP
+INCLUDES_DIR	=	includes/
+	
+LIBFT			=	libft/libft.a 
+LIBFT_DIR		=	libft/
+LIBFT_LINK		=	ft
 
-objs/%.o	: srcs/%.c
-	@mkdir -p $(dir $@)
-	$(CC) $(FLAGS) $(INCLUDES) $(MLX_INCLUDES) -c $< -o $@
+MLX				= 	mlx_linux/libmlx_Linux.a
+MLX_DIR			=	mlx_linux/
+MLX_LINKS		=	mlx_Linux
 
-$(NAME)		:	$(OBJS) Makefile
-	$(MAKE) -C ./libft
-	$(MAKE) -C ./mlx_linux
-	$(CC) $(FLAGS) $(OBJS) -no-pie -L$(LIBFT_DIR) -L$(MLX_DIR) -L/usr/lib -lft $(MLX_LINKS) -o $(NAME)
+USRLIB_DIR		=	/usr/lib/
+USRLIB_LINKS	=	-lXext -lX11 -lm -lz
 
-all			:	$(NAME)
+.PHONY	:	libft
+libft	:
+	$(MAKE) -C $(LIBFT_DIR)
+
+.PHONY	:	mlx
+mlx		:
+	$(MAKE) -C $(MLX_DIR)
+
+OBJS			=	$(SRCS:%.c=$(OBJS_DIR)/%.o)
+
+$(OBJS_DIR)/%.o	: $(SRCS_DIR)/%.c
+	mkdir -p $(OBJS_DIR)
+	$(CC) $(FLAGS) $(DEPS_FLAGS) -I$(INCLUDES_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) -I$(USRLIB_DIR) -c $< -o $@
+	
+$(NAME)		:	mlx libft $(OBJS)
+	$(CC) $(FLAGS) $(OBJS) -no-pie -L$(LIBFT_DIR) -L$(MLX_DIR) -L$(USRLIB_DIR) -l$(LIBFT_LINK) -l$(MLX_LINKS) $(USRLIB_LINKS) -o $(NAME)
+
+all			:	$(NAME) 
 
 clean		:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS_DIR)
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(MLX_DIR) clean
 
 fclean		:    clean
-	$(RM) $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean
-	$(MAKE) -C $(MLX_DIR) clean
+	$(RM) $(NAME) $(LIBFT)
 
 re			:    fclean all
 
