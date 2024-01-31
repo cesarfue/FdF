@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:18:31 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/30 15:49:44 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/31 10:18:30 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,26 @@ void	init_mlx(t_fdf *fdf)
 	is_that_bob_ross(fdf);
 	mlx_key_hook(fdf->img->mlx_win, key_events, fdf);
 	mlx_loop(fdf->img->mlx);
+}
+
+void	menu(t_img *img, t_opts *opts)
+{
+	char	*menu;
+	float	x;
+	float	y;
+
+	y = opts->win_height * 0.05;
+	x = opts->win_width * 0.85;
+	menu = "[Arrows]            Move view";
+	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
+	menu = "[+] [-]             Zoom in, zoom out";
+	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
+	menu = "[1] [2]             Change altitude scaling";
+	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
+	menu = "[Tab] [Space]       Rotate";
+	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
+	menu = "[Esc]               Exit program";
+	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
 }
 
 int	main(int argc, char **argv)

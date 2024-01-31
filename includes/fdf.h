@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/26 15:12:57 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/31 10:03:47 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 # include <math.h> 
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 2560
+#  define WIN_WIDTH 1980
 # endif
 
 # ifndef WIN_HEIGHT 
-#  define WIN_HEIGHT 1600
+#  define WIN_HEIGHT 1080
 # endif
 
 typedef struct s_pos
@@ -97,5 +97,6 @@ void	gradient(t_pos *pos, t_pos *npos, float i, float px);
 int		key_events(int key, t_fdf *fdf);
 void	is_that_bob_ross(t_fdf *fdf);
 void	free_tab(void **tab, int size);
+void	menu(t_img *img, t_opts *opts);
 
 #endif

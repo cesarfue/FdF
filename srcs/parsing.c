@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:16:37 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/30 14:59:24 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/31 09:45:59 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
 
 int	*atoiverse(char **str, t_fdf *fdf)
 {
@@ -54,7 +55,7 @@ void	cartographer(t_fdf *fdf)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		fdf->map->data = (fdf->map->data, (y + 1) * sizeof(int *));
+		fdf->map->data = ft_realloc(fdf->map->data, y * sizeof(int *), (y + 1) * sizeof(int *));
 		if (!fdf->map->data)
 			quit("Memory allocation failed >> cartographer");
 		splat_line = ft_split(line, ' ');

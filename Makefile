@@ -6,42 +6,35 @@
 #    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/15 12:34:28 by cesar             #+#    #+#              #
-#    Updated: 2024/01/30 15:57:22 by cesar            ###   ########.fr        #
+#    Updated: 2024/01/31 09:45:54 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	FdF
 
-SRCS_LIST			=	main.c parsing.c draw.c positions.c mem.c \
+SRCS_LIST			=	main.c parsing.c draw.c positions.c \
 	colors.c events.c utils.c
 
-
-#			Directories			#
 SRCS_DIR		=	srcs/
 OBJS_DIR		=	objs/
 INCLUDES_DIR	=	includes/
 
-#			Name shortcuts			#
 OBJS			=	$(patsubst %.c, $(OBJS_DIR)%.o, $(SRCS))
 DEPS			=	$(patsubst %.c, $(OBJS_DIR)%.d, $(SRCS))
 SRCS			=	$(addprefix $(SRCS_DIR),$(SRCS_LIST))
 
-#			FLAGS			#
 CC				=	cc
-FLAGS			=	-Wall -Wextra -g 
+FLAGS			=	-Wall -Wextra -fsanitize=address -static-libasan -g 
 RM				=	rm -rf
 	
-#			LIBFT			#
 LIBFT			=	libft/libft.a 
 LIBFT_DIR		=	libft/
 LIBFT_LINK		=	ft
 
-#			MLX			#
 MLX				= 	mlx_linux/libmlx_Linux.a
 MLX_DIR			=	mlx_linux/
 MLX_LINKS		=	mlx_Linux
 
-#			Other libs			#
 USRLIB_DIR		=	/usr/lib/
 USRLIB_LINKS	=	-lXext -lX11 -lm -lz
 

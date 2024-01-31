@@ -6,29 +6,21 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:24:37 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/30 15:54:05 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/31 09:05:34 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
-#include <stdio.h>
 
-void	*ft_realloc(void *ptr, size_t size)
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 {
 	void	*ret;
-	size_t	old_size;
 
-	if (size == 0)
-		return (free(ptr), NULL);
-	ret = malloc(size);
-	if (ret == NULL)
+	ret = malloc(new_size);
+	if (!ret)
 		return (NULL);
-	else if (ptr == NULL)
+	if (!ptr)
 		return (ret);
-	old_size = sizeof(ret);
-	if (size <= old_size)
-		return (ret);
-	ft_memcpy(ret, ptr, size);
-	free(ptr);
-	return (ret);
+	ft_memmove(ret, ptr, old_size);
+	return (free(ptr), ret); 
 }
