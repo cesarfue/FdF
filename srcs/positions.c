@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   positions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:00:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/26 14:43:33 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:45:37 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
 
 void	calc_min_max(t_pos pos, t_opts *opts)
 {
@@ -68,7 +69,6 @@ void	positions(t_fdf *fdf)
 			base_pos(&fdf->pos[y][x], fdf, y, x);
 			iso(&fdf->pos[y][x], fdf->opts->angle);
 			scale(fdf->opts, &fdf->pos[y][x]);
-			colors(fdf->opts, &fdf->pos[y][x]);
 			calc_min_max(fdf->pos[y][x], fdf->opts);
 			x++;
 		}

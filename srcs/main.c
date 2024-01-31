@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:18:31 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/31 10:18:30 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/31 14:52:44 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	init_mlx(t_fdf *fdf)
 			&fdf->img->line_length, &fdf->img->endian);
 	is_that_bob_ross(fdf);
 	mlx_key_hook(fdf->img->mlx_win, key_events, fdf);
+	mlx_hook(fdf->img->mlx_win, 17, 0, (void *)close_window, fdf);
 	mlx_loop(fdf->img->mlx);
 }
 
@@ -63,7 +64,7 @@ void	menu(t_img *img, t_opts *opts)
 	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
 	menu = "[Tab] [Space]       Rotate";
 	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
-	menu = "[Esc]               Exit program";
+	menu = "[Esc]               Close";
 	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
 }
 

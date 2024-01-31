@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/31 10:02:23 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/31 14:55:39 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	px_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
  
-	if (x > WIN_WIDTH || x < 0 || y > WIN_HEIGHT || y < 0)
+	if (x >= WIN_WIDTH || x <= 0 || y >= WIN_HEIGHT || y <= 0)
 		return ;
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
@@ -29,13 +29,16 @@ void	iso(t_pos *pos, float angle)
 	pos->y = (pos->x + pos->y) * sin(angle) - pos->z;
 }
 
-int	line(t_img *img, t_pos pos, t_pos npos)
+int	line(t_opts *opts, t_img *img, t_pos pos, t_pos npos)
 {
 	float	delta_x;
 	float	delta_y;
 	float	px;
 	float	i;
 
+	colors(opts, &pos);
+	colors(opts, &npos);
+	// printf("pos color is %d, next is %d\n", pos.color, npos.color);
 	delta_x = npos.x - pos.x;
 	delta_y = npos.y - pos.y;
 	px = max(absol(delta_x), absol(delta_y));
@@ -60,14 +63,16 @@ void	is_that_bob_ross(t_fdf *fdf)
 
 	x = 0;
 	y = 0;
+	fdf->opts->range = fdf->opts->max_z - fdf->opts->min_z;
+	fdf->opts->sector = fdf->opts->range / 3;
 	while (y < fdf->map->height)
 	{
 		while (x < fdf->map->width)
 		{
 			if (x + 1 < fdf->map->width)
-				line(fdf->img, fdf->pos[y][x], fdf->pos[y][x + 1]);
+				line(fdf->opts, fdf->img, fdf->pos[y][x], fdf->pos[y][x + 1]);
 			if (y + 1 < fdf->map->height)
-				line(fdf->img, fdf->pos[y][x], fdf->pos[y + 1][x]);
+				line(fdf->opts, fdf->img, fdf->pos[y][x], fdf->pos[y + 1][x]);
 			x++;
 		}
 		x = 0;

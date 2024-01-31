@@ -6,7 +6,7 @@
 #    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/15 12:34:28 by cesar             #+#    #+#              #
-#    Updated: 2024/01/31 09:45:54 by cesar            ###   ########.fr        #
+#    Updated: 2024/01/31 14:56:57 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,10 @@ OBJS_DIR		=	objs/
 INCLUDES_DIR	=	includes/
 
 OBJS			=	$(patsubst %.c, $(OBJS_DIR)%.o, $(SRCS))
-DEPS			=	$(patsubst %.c, $(OBJS_DIR)%.d, $(SRCS))
 SRCS			=	$(addprefix $(SRCS_DIR),$(SRCS_LIST))
 
 CC				=	cc
-FLAGS			=	-Wall -Wextra -fsanitize=address -static-libasan -g 
+FLAGS			=	-Wall -Wextra -g 
 RM				=	rm -rf
 	
 LIBFT			=	libft/libft.a 
@@ -44,7 +43,7 @@ $(NAME)		:	mlx libft $(OBJS)
 	$(CC) $(FLAGS) $(OBJS) -no-pie -L$(LIBFT_DIR) -L$(MLX_DIR) -L$(USRLIB_DIR) -l$(LIBFT_LINK) -l$(MLX_LINKS) $(USRLIB_LINKS) -o $(NAME)
 
 
-$(OBJS_DIR)%.o	: %.c
+$(OBJS_DIR)%.o	:	%.c
 	mkdir -p $(dir $@)
 	$(CC) $(FLAGS) -I$(INCLUDES_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) -I$(USRLIB_DIR) -c $< -o $@
 

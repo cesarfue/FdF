@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:45:48 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/26 14:40:23 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/31 15:12:48 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,15 @@
 
 void	colors(t_opts *opts, t_pos *pos)
 {
-	float	range;
-	float	sector;
-
-	range = opts->max_z - opts->min_z;
-	sector = range / 5;
-	if (pos->z >= opts->min_z && pos->z < opts->min_z + sector)
-		pos->color = 0xffccff;
-	else if (pos->z >= opts->min_z + sector
-		&& pos->z < opts->min_z + sector * 2)
-		pos->color = 0xccccff;
-	else if (pos->z >= opts->min_z + sector * 2
-		&& pos->z < opts->min_z + sector * 3)
-		pos->color = 0x99ccff;
-	else if (pos->z >= opts->min_z + sector * 3
-		&& pos->z < opts->min_z + sector * 4)
-		pos->color = 0x666699;
-	else if (pos->z >= opts->min_z + sector * 4)
-		pos->color = 0x333366;
+	if (pos->z == opts->min_z)
+		pos->color = 0x1F2544;
+	else if (pos->z >= opts->min_z && pos->z < opts->min_z + opts->sector)
+		pos->color = 0x474F7A;
+	else if (pos->z >= opts->min_z + opts->sector
+		&& pos->z < opts->min_z + opts->sector * 2)
+		pos->color = 0x81689D;
+	else if (pos->z >= opts->min_z + opts->sector * 2)
+		pos->color = 0xFFD0EC;
 }
 
 int	gr_red(int start_red, int end_red, float ratio)

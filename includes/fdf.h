@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/31 10:03:47 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/31 14:58:16 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ typedef struct s_opts
 	float	max_x;
 	float	min_y;
 	float	max_y;
-	int		min_z;
-	int		max_z;
+	float	min_z;
+	float	max_z;
+	float	sector;
+	float	range;
 	int		scale;
 	int		alt_scale;
 	float	view_x;
@@ -98,5 +100,6 @@ int		key_events(int key, t_fdf *fdf);
 void	is_that_bob_ross(t_fdf *fdf);
 void	free_tab(void **tab, int size);
 void	menu(t_img *img, t_opts *opts);
+void	close_window(t_fdf *fdf);
 
 #endif
