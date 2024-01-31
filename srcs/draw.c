@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/31 14:55:39 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/31 17:53:20 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@ void	px_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	iso(t_pos *pos, float angle)
-{
-	pos->x = (pos->x - pos->y) * cos(angle);
-	pos->y = (pos->x + pos->y) * sin(angle) - pos->z;
-}
-
 int	line(t_opts *opts, t_img *img, t_pos pos, t_pos npos)
 {
 	float	delta_x;
@@ -38,7 +32,6 @@ int	line(t_opts *opts, t_img *img, t_pos pos, t_pos npos)
 
 	colors(opts, &pos);
 	colors(opts, &npos);
-	// printf("pos color is %d, next is %d\n", pos.color, npos.color);
 	delta_x = npos.x - pos.x;
 	delta_y = npos.y - pos.y;
 	px = max(absol(delta_x), absol(delta_y));
@@ -80,5 +73,5 @@ void	is_that_bob_ross(t_fdf *fdf)
 	}
 	mlx_put_image_to_window(fdf->img->mlx, fdf->img->mlx_win,
 		fdf->img->img, 0, 0);
-	menu(fdf->img, fdf->opts); 
+	menu(fdf->img, fdf->opts);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:12:58 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/26 15:10:38 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/31 17:32:25 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ void	close_window(t_fdf *fdf)
 	exit(0);
 }
 
-void	new_window(t_fdf *fdf)
+void	new_image(t_fdf *fdf)
 {
 	mlx_destroy_image(fdf->img->mlx, fdf->img->img);
-	mlx_clear_window(fdf->img->mlx, fdf->img->mlx_win);
 	fdf->img->img = mlx_new_image(fdf->img->mlx,
 			fdf->opts->win_width, fdf->opts->win_height);
 	if (!fdf->img->img)
@@ -56,9 +55,9 @@ int	view_changed(int key, t_fdf *fdf)
 	if (key == 65362)
 		return (fdf->opts->view_y += 80, 1);
 	if (key == 45)
-		return (fdf->opts->img_width -= 100, 1);
+		return (fdf->opts->scale -= 0.05, 1);
 	if (key == 61)
-		return (fdf->opts->img_width += 100, 1);
+		return (fdf->opts->scale += 0.05, 1);
 	if (key == 32)
 		return (fdf->opts->angle += 0.1, 1);
 	if (key == 65289)
@@ -73,7 +72,7 @@ int	view_changed(int key, t_fdf *fdf)
 int	key_events(int key, t_fdf *fdf)
 {
 	if (view_changed(key, fdf) == 1)
-		new_window(fdf);
+		new_image(fdf);
 	else if (escaped(key) == 1)
 		close_window(fdf);
 	return (0);

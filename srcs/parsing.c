@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:16:37 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/31 15:11:08 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/31 15:36:19 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	cartographer(t_fdf *fdf)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		fdf->map->data = ft_realloc(fdf->map->data, y * sizeof(int *), (y + 1) * sizeof(int *));
+		fdf->map->data = ft_realloc(fdf->map->data, y * sizeof(int *),
+				(y + 1) * sizeof(int *));
 		if (!fdf->map->data)
 			quit("Memory allocation failed >> cartographer");
 		splat_line = ft_split(line, ' ');
