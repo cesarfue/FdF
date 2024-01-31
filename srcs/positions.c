@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   positions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:00:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/31 17:53:33 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:29:24 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	positions(t_fdf *fdf)
 
 	y = 0;
 	x = 0;
+	fdf->opts->min_z = __FLT_MAX__;
+	fdf->opts->max_z = __FLT_MIN__;
 	while (y < fdf->map->height)
 	{
 		while (x < fdf->map->width)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:18:31 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/31 17:46:48 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:27:51 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@ void	init_opts(t_fdf *fdf)
 	fdf->opts->alt_scale = 5;
 	fdf->opts->loops = 0;
 	fdf->opts->step = fdf->opts->win_width / fdf->map->width;
-	fdf->opts->min_x = __FLT_MAX__;
-	fdf->opts->max_x = __FLT_MIN__;
-	fdf->opts->min_y = __FLT_MAX__;
-	fdf->opts->max_y = __FLT_MIN__;
-	fdf->opts->min_z = __FLT_MAX__;
-	fdf->opts->max_z = __FLT_MIN__;
 	alloc_positions(fdf);
 }
 
@@ -80,7 +74,6 @@ int	main(int argc, char **argv)
 	fdf.map->file = argv[1];
 	cartographer(&fdf);
 	init_opts(&fdf);
-
 	positions(&fdf);
 	init_mlx(&fdf);
 	return (0);
