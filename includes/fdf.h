@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/31 17:42:24 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/31 21:13:22 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,8 @@ typedef struct s_opts
 {
 	int		win_width;
 	int		win_height;
-	float	img_width;
-	float	img_height;
 	float	step;
 	float	angle;
-	float	min_x;
-	float	max_x;
-	float	min_y;
-	float	max_y;
 	float	min_z;
 	float	max_z;
 	float	sector;
@@ -75,6 +69,7 @@ typedef struct s_opts
 	float	view_x;
 	float	view_y;
 	int		loops;
+	float	rotate;
 }	t_opts;
 
 typedef struct s_fdf
@@ -91,7 +86,7 @@ void	alloc_positions(t_fdf *fdf);
 void	init_mlx(t_fdf *fdf);
 float	absol(float i);
 float	max(float x, float y);
-void	calc_min_max(t_pos pos, t_opts *opts);
+void	calc_zmin_zmax(t_pos pos, t_opts *opts);
 void	iso(t_pos *pos, t_opts *opts);
 void	positions(t_fdf *fdf);
 void	colors(t_opts *opts, t_pos *pos);

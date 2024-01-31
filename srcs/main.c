@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:18:31 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/31 18:27:51 by cesar            ###   ########.fr       */
+/*   Updated: 2024/01/31 20:59:56 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_opts(t_fdf *fdf)
 	fdf->opts->scale = 1;
 	fdf->opts->alt_scale = 5;
 	fdf->opts->loops = 0;
+	fdf->opts->rotate = 0;
 	fdf->opts->step = fdf->opts->win_width / fdf->map->width;
 	alloc_positions(fdf);
 }
@@ -36,9 +37,9 @@ void	init_mlx(t_fdf *fdf)
 	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bits_per_pixel,
 			&fdf->img->line_length, &fdf->img->endian);
 	is_that_bob_ross(fdf);
-	mlx_key_hook(fdf->img->mlx_win, key_events, fdf);
-	mlx_mouse_hook(fdf->img->mlx_win, mouse_events, fdf);
 	mlx_hook(fdf->img->mlx_win, 17, 0, (void *)close_window, fdf);
+	mlx_hook(fdf->img->mlx_win, 2, 1L << 0, key_events, fdf);
+	mlx_mouse_hook(fdf->img->mlx_win, mouse_events, fdf);
 	mlx_loop(fdf->img->mlx);
 }
 
@@ -52,11 +53,13 @@ void	menu(t_img *img, t_opts *opts)
 	x = opts->win_width * 0.85;
 	menu = "[Arrows]            Move view";
 	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
-	menu = "[+] [-]             Zoom in, zoom out";
+	menu = "[Wheel] [+] [-]     Zoom in, zoom out";
 	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
 	menu = "[1] [2]             Change altitude scaling";
 	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
-	menu = "[Tab] [Space]       Rotate";
+	menu = "[Q] [W]    			Rotate";
+	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
+	menu = "[Tab] [Space]       Change projection angle";
 	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
 	menu = "[Esc]               Close";
 	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);

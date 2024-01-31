@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:12:58 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/31 17:32:25 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/01/31 21:11:38 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,17 @@ int	view_changed(int key, t_fdf *fdf)
 	if (key == 61)
 		return (fdf->opts->scale += 0.05, 1);
 	if (key == 32)
-		return (fdf->opts->angle += 0.1, 1);
+		return (fdf->opts->angle += 0.05, 1);
 	if (key == 65289)
-		return (fdf->opts->angle -= 0.1, 1);
+		return (fdf->opts->angle -= 0.05, 1);
 	if (key == 49)
-		return (fdf->opts->alt_scale -= 2, 1);
+		return (fdf->opts->alt_scale -= 1, 1);
 	if (key == 50)
-		return (fdf->opts->alt_scale += 2, 1);
+		return (fdf->opts->alt_scale += 1, 1);
+	if (key == 113)
+		return (fdf->opts->rotate -= 0.05, 1);
+	if (key == 119)
+		return (fdf->opts->rotate += 0.05, 1);
 	return (0);
 }
 
