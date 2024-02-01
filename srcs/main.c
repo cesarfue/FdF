@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:18:31 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/31 20:59:56 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/01 10:10:28 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	menu(t_img *img, t_opts *opts)
 	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
 	menu = "[1] [2]             Change altitude scaling";
 	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
-	menu = "[Q] [W]    			Rotate";
+	menu = "[Q] [W]             Rotate";
 	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
 	menu = "[Tab] [Space]       Change projection angle";
 	mlx_string_put(img->mlx, img->mlx_win, x, y += 20, 0xccccff, menu);
