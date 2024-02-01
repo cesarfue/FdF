@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:18:31 by cefuente          #+#    #+#             */
-/*   Updated: 2024/02/01 10:10:28 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/01 18:14:08 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	init_opts(t_fdf *fdf)
 	fdf->opts->loops = 0;
 	fdf->opts->rotate = 0;
 	fdf->opts->step = fdf->opts->win_width / fdf->map->width;
-	alloc_positions(fdf);
 }
 
 void	init_mlx(t_fdf *fdf)
@@ -67,18 +66,19 @@ void	menu(t_img *img, t_opts *opts)
 
 int	main(int argc, char **argv)
 {
-	t_fdf	fdf;
+	t_fdf	*fdf;
 
 	if (!argv[0] || !argv[1] || (argc != 2))
 		quit("Invalid arguments");
-	fdf.img = malloc(sizeof(t_img));
-	fdf.map = malloc(sizeof(t_map));
-	fdf.opts = malloc(sizeof(t_opts));
-	fdf.map->file = argv[1];
-	cartographer(&fdf);
-	init_opts(&fdf);
-	positions(&fdf);
-	init_mlx(&fdf);
+	fdf = malloc_er(sizeof(t_fdf));
+	fdf->img = malloc_er(sizeof(t_img));
+	fdf->map = malloc_er(sizeof(t_map));
+	fdf->opts = malloc_er(sizeof(t_opts));
+	fdf->map->file = argv[1];
+	cartographer(fdf);
+	init_opts(fdf);
+	alloc_positions(fdf);
+	positions(fdf);
+	init_mlx(fdf);
 	return (0);
 }
-

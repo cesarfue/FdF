@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:16:37 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/31 15:36:19 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/02/01 18:13:53 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
 
 int	*atoiverse(char **str, t_fdf *fdf)
 {
@@ -22,9 +21,7 @@ int	*atoiverse(char **str, t_fdf *fdf)
 	i = -1;
 	while (str[++i])
 		;
-	ret = malloc(i * sizeof(int));
-	if (!ret)
-		quit("Memory allocation failed in the multiverse of atoi");
+	ret = malloc_er(i * sizeof(int));
 	i = -1;
 	while (str[++i])
 		ret[i] = ft_atoi(str[i]);
@@ -48,17 +45,15 @@ void	cartographer(t_fdf *fdf)
 	char	**splat_line;
 
 	fd = open(fdf->map->file, O_RDONLY);
-	y = 0;
 	if (fd == -1)
 		quit("Invalid fd");
+	y = 0;
 	fdf->map->data = NULL;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
 		fdf->map->data = ft_realloc(fdf->map->data, y * sizeof(int *),
 				(y + 1) * sizeof(int *));
-		if (!fdf->map->data)
-			quit("Memory allocation failed >> cartographer");
 		splat_line = ft_split(line, ' ');
 		fdf->map->data[y++] = atoiverse(splat_line, fdf);
 		free(line);
@@ -66,5 +61,4 @@ void	cartographer(t_fdf *fdf)
 	}
 	fdf->map->height = y;
 	close(fd);
-	free(line);
 }

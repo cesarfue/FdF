@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:12:29 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/31 09:02:49 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/01 16:45:29 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ char	*get_next_line(int fd);
 void	quit(char *quit_msg);
 char	*ft_strndup(char const *src, size_t n);
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+void	*malloc_er(size_t size); /* Malloc, but better */
 
 
 #endif

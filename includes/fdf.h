@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/31 21:13:22 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/01 17:37:17 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,11 @@ void	colors(t_opts *opts, t_pos *pos);
 void	gradient(t_pos *pos, t_pos *npos, float i, float px);
 int		key_events(int key, t_fdf *fdf);
 void	is_that_bob_ross(t_fdf *fdf);
-void	free_tab(void **tab, int size);
 void	menu(t_img *img, t_opts *opts);
 void	close_window(t_fdf *fdf);
 int		mouse_events(int key, int x, int y, t_fdf *fdf);
 void	new_image(t_fdf *fdf);
+void	freetab_in(void **tab, int size);
+void	freetab_in_out(void **tab, int size);
 
 #endif

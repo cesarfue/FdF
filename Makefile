@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+         #
+#    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/15 12:34:28 by cesar             #+#    #+#              #
-#    Updated: 2024/01/31 15:30:03 by cefuente         ###   ########.fr        #
+#    Updated: 2024/02/01 18:15:13 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJS			=	$(patsubst %.c, $(OBJS_DIR)%.o, $(SRCS))
 SRCS			=	$(addprefix $(SRCS_DIR),$(SRCS_LIST))
 
 CC				=	cc
-FLAGS			=	-Wall -Wextra -g 
+FLAGS			=	-Wall -Wextra -Werror -g 
 RM				=	rm -rf
 	
 LIBFT			=	libft/libft.a 

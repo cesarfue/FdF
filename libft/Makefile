@@ -6,7 +6,7 @@
 #    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/03 18:46:17 by cefuente          #+#    #+#              #
-#    Updated: 2024/01/26 13:26:46 by cesar            ###   ########.fr        #
+#    Updated: 2024/02/01 16:45:29 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS	=	srcs/ft_atoi.c srcs/ft_bzero.c srcs/ft_calloc.c srcs/ft_isalnum.c srcs/ft
 	srcs/ft_lstmap_bonus.c srcs/ft_lstnew_bonus.c srcs/ft_lstsize_bonus.c \
 	srcs/printf/ft_printf.c srcs/printf/ft_numbers.c srcs/printf/ft_strings.c srcs/printf/ft_switch.c \
 	srcs/get_next_line.c \
-	srcs/quit.c srcs/ft_strndup.c srcs/ft_realloc.c \
+	srcs/quit.c srcs/ft_strndup.c srcs/ft_realloc.c srcs/malloc_er.c \
 
 OBJS	=	$(patsubst srcs/%.c, objs/%.o, $(SRCS))
 HEADER    =    includes/libft.h includes/ft_printf.h

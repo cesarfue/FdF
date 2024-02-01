@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:20:35 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/31 09:46:31 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/01 18:12:54 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,24 @@ void	alloc_positions(t_fdf *fdf)
 	int	i;
 
 	i = 0;
-	fdf->pos = malloc((fdf->map->height) * sizeof(t_pos *));
-	if (!fdf->pos)
-		quit("alloc faild -> pos");
+	fdf->pos = malloc_er((fdf->map->height) * sizeof(t_pos *));
 	while (i < fdf->map->height)
 	{
-		fdf->pos[i] = malloc((fdf->map->width) * sizeof(t_pos));
-		if (!fdf->pos[i])
-			quit("alloc faild -> pos");
+		fdf->pos[i] = malloc_er((fdf->map->width) * sizeof(t_pos));
 		i++;
 	}
 }
 
-void	free_tab(void **tab, int size)
+void	freetab_in(void **tab, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+		free(tab[i++]);
+}
+
+void	freetab_in_out(void **tab, int size)
 {
 	int	i;
 

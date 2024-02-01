@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:00:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/31 21:12:22 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/01 18:13:33 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,14 @@
 void	iso(t_pos *pos, t_opts *opts)
 {
 	float	prev_x;
-    float	prev_y;
+	float	prev_y;
 
-    prev_x = pos->x;
-    prev_y = pos->y;
-	/* Rotate */
-    pos->x = prev_x * cos(opts->rotate) - prev_y * sin(opts->rotate);
-    pos->y = prev_x * sin(opts->rotate) + prev_y * cos(opts->rotate);
-	/* Calculate iso projection */
+	prev_x = pos->x;
+	prev_y = pos->y;
+	pos->x = prev_x * cos(opts->rotate) - prev_y * sin(opts->rotate);
+	pos->y = prev_x * sin(opts->rotate) + prev_y * cos(opts->rotate);
 	pos->x = (pos->x - pos->y) * cos(opts->angle);
 	pos->y = (pos->x + pos->y) * sin(opts->angle) - pos->z;
-	/* Scale width and height */
 	pos->x += opts->view_x;
 	pos->y += opts->view_y;
 }

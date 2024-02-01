@@ -8,8 +8,8 @@
       "args": ["maps/test_maps/42.fdf"],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/cefuente/Cursus/FdF/",
-      "program": "/home/cefuente/Cursus/FdF/FdF",
+      "cwd": "/home/cesar/Cursus/FdF/",
+      "program": "/home/cesar/Cursus/FdF/FdF",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

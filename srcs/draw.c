@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:19:58 by cefuente          #+#    #+#             */
-/*   Updated: 2024/01/31 21:35:50 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/01 18:14:32 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	px_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
- 
+
 	if (x >= WIN_WIDTH || x <= 0 || y >= WIN_HEIGHT || y <= 0)
 		return ;
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));

@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:12:58 by cesar             #+#    #+#             */
-/*   Updated: 2024/01/31 21:11:38 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/01 18:00:39 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	close_window(t_fdf *fdf)
 {
-	mlx_destroy_image(fdf->img->mlx, fdf->img->img);
-	mlx_clear_window(fdf->img->mlx, fdf->img->mlx_win);
 	mlx_destroy_window(fdf->img->mlx, fdf->img->mlx_win);
-	free_tab((void **)fdf->map->data, fdf->map->height);
-	free_tab((void **)fdf->pos, fdf->map->height);
-	free(fdf->img);
+	freetab_in_out((void **)fdf->map->data, fdf->map->height);
+	freetab_in((void **)fdf->pos, fdf->map->height);
+	free(fdf->map);
+	free(fdf->pos);
 	free(fdf->opts);
+	free(fdf->img->mlx);
+	free(fdf);
 	exit(0);
 }
 
