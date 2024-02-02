@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:12:58 by cesar             #+#    #+#             */
-/*   Updated: 2024/02/01 18:00:39 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/02 14:53:11 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-void	close_window(t_fdf *fdf)
-{
-	mlx_destroy_window(fdf->img->mlx, fdf->img->mlx_win);
-	freetab_in_out((void **)fdf->map->data, fdf->map->height);
-	freetab_in((void **)fdf->pos, fdf->map->height);
-	free(fdf->map);
-	free(fdf->pos);
-	free(fdf->opts);
-	free(fdf->img->mlx);
-	free(fdf);
-	exit(0);
-}
 
 void	new_image(t_fdf *fdf)
 {
@@ -31,9 +18,11 @@ void	new_image(t_fdf *fdf)
 	fdf->img->img = mlx_new_image(fdf->img->mlx,
 			fdf->opts->win_width, fdf->opts->win_height);
 	if (!fdf->img->img)
-		quit("Error : img pointer failed");
+		quit_app(fdf, -1);
 	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bits_per_pixel,
 			&fdf->img->line_length, &fdf->img->endian);
+	if (!fdf->img->addr)
+		quit_app(fdf, -1);
 	positions(fdf);
 	is_that_bob_ross(fdf);
 }
@@ -79,6 +68,6 @@ int	key_events(int key, t_fdf *fdf)
 	if (view_changed(key, fdf) == 1)
 		new_image(fdf);
 	else if (escaped(key) == 1)
-		close_window(fdf);
+		quit_app(fdf, 0);
 	return (0);
 }

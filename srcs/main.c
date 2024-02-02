@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:18:31 by cefuente          #+#    #+#             */
-/*   Updated: 2024/02/01 18:14:08 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/02 15:15:50 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,22 @@ void	init_opts(t_fdf *fdf)
 void	init_mlx(t_fdf *fdf)
 {
 	fdf->img->mlx = mlx_init();
+	if (!fdf->img->mlx)
+		quit_app(fdf, -1);
 	fdf->img->mlx_win = mlx_new_window(fdf->img->mlx, fdf->opts->win_width,
 			fdf->opts->win_height, "Fils de fer");
+	if (!fdf->img->mlx_win)
+		quit_app(fdf, -1);
 	fdf->img->img = mlx_new_image(fdf->img->mlx,
 			fdf->opts->win_width, fdf->opts->win_height);
+	if (!fdf->img->img)
+		quit_app(fdf, -1);
 	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bits_per_pixel,
 			&fdf->img->line_length, &fdf->img->endian);
+	if (!fdf->img->addr)
+		quit_app(fdf, -1);
 	is_that_bob_ross(fdf);
-	mlx_hook(fdf->img->mlx_win, 17, 0, (void *)close_window, fdf);
+	mlx_hook(fdf->img->mlx_win, 17, 0, (void *)quit_app, fdf);
 	mlx_hook(fdf->img->mlx_win, 2, 1L << 0, key_events, fdf);
 	mlx_mouse_hook(fdf->img->mlx_win, mouse_events, fdf);
 	mlx_loop(fdf->img->mlx);
@@ -80,5 +88,6 @@ int	main(int argc, char **argv)
 	alloc_positions(fdf);
 	positions(fdf);
 	init_mlx(fdf);
+	free(fdf);
 	return (0);
 }
