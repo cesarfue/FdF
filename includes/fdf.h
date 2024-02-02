@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/02/02 14:46:30 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:22:56 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,7 @@ int		mouse_events(int key, int x, int y, t_fdf *fdf);
 void	new_image(t_fdf *fdf);
 void	freetab_in(void **tab, int size);
 void	freetab_ext(void **tab, int size);
+void	*calloc_er(t_fdf *fdf, size_t nmemb, size_t size);
+
 
 #endif

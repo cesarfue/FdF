@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:12:58 by cesar             #+#    #+#             */
-/*   Updated: 2024/02/02 14:53:11 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:36:08 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	new_image(t_fdf *fdf)
 	fdf->img->img = mlx_new_image(fdf->img->mlx,
 			fdf->opts->win_width, fdf->opts->win_height);
 	if (!fdf->img->img)
-		quit_app(fdf, -1);
+		quit_app(fdf, 2);
 	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bits_per_pixel,
 			&fdf->img->line_length, &fdf->img->endian);
 	if (!fdf->img->addr)
-		quit_app(fdf, -1);
+		quit_app(fdf, 2);
 	positions(fdf);
 	is_that_bob_ross(fdf);
 }

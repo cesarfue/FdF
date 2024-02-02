@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
+#    By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/15 12:34:28 by cesar             #+#    #+#              #
-#    Updated: 2024/02/01 18:15:13 by cesar            ###   ########.fr        #
+#    Updated: 2024/02/02 16:00:06 by cefuente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	FdF
 
 SRCS_LIST			=	main.c parsing.c draw.c positions.c \
-	colors.c key_events.c utils.c mouse_events.c
+	colors.c key_events.c utils.c mouse_events.c exit.c \
 
 SRCS_DIR		=	srcs/
 OBJS_DIR		=	objs/
