@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:18:31 by cefuente          #+#    #+#             */
-/*   Updated: 2024/02/02 16:30:59 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/02/05 18:47:11 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,27 @@ void	init_opts(t_fdf *fdf)
 	fdf->opts->alt_scale = 5;
 	fdf->opts->loops = 0;
 	fdf->opts->rotate = 0;
-	fdf->opts->step = fdf->opts->win_width / fdf->map->width;
+	if (fdf->map->width > 0)
+		fdf->opts->step = fdf->opts->win_width / fdf->map->width;
 }
 
 void	init_mlx(t_fdf *fdf)
 {
 	fdf->img->mlx = mlx_init();
 	if (!fdf->img->mlx)
-		quit_app(fdf, 2);
+		quit_app(fdf, 4);
 	fdf->img->mlx_win = mlx_new_window(fdf->img->mlx, fdf->opts->win_width,
 			fdf->opts->win_height, "Fils de fer");
 	if (!fdf->img->mlx_win)
-		quit_app(fdf, 2);
+		quit_app(fdf, 5);
 	fdf->img->img = mlx_new_image(fdf->img->mlx,
 			fdf->opts->win_width, fdf->opts->win_height);
 	if (!fdf->img->img)
-		quit_app(fdf, 2);
+		quit_app(fdf, 6);
 	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bits_per_pixel,
 			&fdf->img->line_length, &fdf->img->endian);
 	if (!fdf->img->addr)
-		quit_app(fdf, 2);
+		quit_app(fdf, 7);
 	is_that_bob_ross(fdf);
 	mlx_hook(fdf->img->mlx_win, 17, 0, (void *)quit_app, fdf);
 	mlx_hook(fdf->img->mlx_win, 2, 1L << 0, key_events, fdf);
@@ -80,11 +81,13 @@ int	main(int argc, char **argv)
 		quit("Invalid arguments");
 	fdf = calloc(1, sizeof(t_fdf));
 	if (!fdf)
-		quit("Error : memory allocation failed");
-	fdf->img = calloc_er(fdf, 1, sizeof(t_img));
-	fdf->map = calloc_er(fdf, 1, sizeof(t_map));
-	fdf->opts = calloc_er(fdf, 1, sizeof(t_opts));
+		quit("Memory allocation failed (fdf)");
+	fdf->img = calloc_er(1, sizeof(t_img), fdf, 1);
+	fdf->map = calloc_er(1, sizeof(t_map), fdf, 1);
+	fdf->opts = calloc_er(1, sizeof(t_opts), fdf, 1);
 	fdf->map->file = argv[1];
+	fdf->map->height = 0;
+	fdf->map->data = NULL;
 	cartographer(fdf);
 	init_opts(fdf);
 	alloc_positions(fdf);
