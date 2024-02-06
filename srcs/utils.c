@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:20:35 by cesar             #+#    #+#             */
-/*   Updated: 2024/02/05 20:51:31 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/06 14:51:29 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,17 @@ void	alloc_positions(t_fdf *fdf)
 		i++;
 	}
 }
+
+char	*check_file(t_fdf *fdf, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	if (ft_strnstr(&str[i - 4], ".fdf", 4) != NULL)
+		return (str);
+	quit_app(fdf, 0.5);
+	return (NULL);
+}
+

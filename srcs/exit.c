@@ -6,13 +6,13 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:40:04 by cefuente          #+#    #+#             */
-/*   Updated: 2024/02/05 20:51:30 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/06 16:44:09 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	*calloc_er(size_t nmemb, size_t size, t_fdf *fdf, int err)
+void	*calloc_er(size_t nmemb, size_t size, t_fdf *fdf, float err)
 {
 	void		*ret;
 
@@ -22,21 +22,25 @@ void	*calloc_er(size_t nmemb, size_t size, t_fdf *fdf, int err)
 	return (ret);
 }
 
-void	err_code(int err)
+void	err_code(float err)
 {
 	if (err == 0)
 		exit(0);
 	else if (err == 1)
 		quit("Memory allocation failed (1; fdf structures)");
+	else if (err == 1.5)
+		quit("Invalid file or extension (program must be called with a .fdf)"); 
 	else if (err == 2)
 		quit("Memory allocation failed (2; parsing)");
+	else if (err == 2.5)
+		quit("Invalid map (width and height must be greater than 1)");
 	else if (err == 3)
 		quit("Memory allocation failed (3; positions)");
 	else if (err >= 4)
 		quit("Error occured inside mlx functions (4 - 6)");
 }
 
-void	quit_app(t_fdf *fdf, int err)
+void	quit_app(t_fdf *fdf, float err)
 {
 	if (err >= 6 || err == 0)
 	{

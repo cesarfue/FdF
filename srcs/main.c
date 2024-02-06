@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:18:31 by cefuente          #+#    #+#             */
-/*   Updated: 2024/02/05 18:47:11 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/06 17:19:56 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,14 @@ int	main(int argc, char **argv)
 	fdf->img = calloc_er(1, sizeof(t_img), fdf, 1);
 	fdf->map = calloc_er(1, sizeof(t_map), fdf, 1);
 	fdf->opts = calloc_er(1, sizeof(t_opts), fdf, 1);
-	fdf->map->file = argv[1];
+	fdf->map->file = check_file(fdf, argv[1]);
 	fdf->map->height = 0;
+	fdf->map->width =__INT_MAX__; 
 	fdf->map->data = NULL;
 	cartographer(fdf);
+	if (fdf->map->height <= 1 ||  fdf->map->width <= 1
+		|| !fdf->map->height || !fdf->map->width)
+		quit_app(fdf, 2.5);
 	init_opts(fdf);
 	alloc_positions(fdf);
 	positions(fdf);
