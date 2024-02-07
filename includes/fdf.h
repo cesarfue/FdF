@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/02/02 16:22:56 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/02/06 14:37:00 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_map
 	int		width;
 	int		height;
 	char	*file;
+	int		allocs;
 }	t_map;
 
 typedef struct s_opts
@@ -94,12 +95,13 @@ void	gradient(t_pos *pos, t_pos *npos, float i, float px);
 int		key_events(int key, t_fdf *fdf);
 void	is_that_bob_ross(t_fdf *fdf);
 void	menu(t_img *img, t_opts *opts);
-void	quit_app(t_fdf *fdf, int err);
+void	quit_app(t_fdf *fdf, float err);
 int		mouse_events(int key, int x, int y, t_fdf *fdf);
 void	new_image(t_fdf *fdf);
 void	freetab_in(void **tab, int size);
-void	freetab_ext(void **tab, int size);
-void	*calloc_er(t_fdf *fdf, size_t nmemb, size_t size);
+void	freetab(void **tab, int size);
+void	*calloc_er(size_t nmemb, size_t size, t_fdf *fdf, float err);
+char	*check_file(t_fdf *fdf, char *str);
 
 
 #endif

@@ -3,62 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:40:04 by cefuente          #+#    #+#             */
-/*   Updated: 2024/02/02 16:28:49 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:44:09 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	*calloc_er(t_fdf *fdf, size_t nmemb, size_t size)
+void	*calloc_er(size_t nmemb, size_t size, t_fdf *fdf, float err)
 {
-	void	*ret;
-	static int		i;
+	void		*ret;
 
-	
-	ret = (i++ == 9 ? NULL : ft_calloc(nmemb, size));
-	ft_printf("%d ", i);
+	ret = ft_calloc(nmemb, size);
 	if (ret == NULL)
-		quit_app(fdf, 1);
+		quit_app(fdf, err);
 	return (ret);
 }
 
-void	err_code(int err)
+void	err_code(float err)
 {
-	if (err == 1)
-		quit("Memory allocation failed");
+	if (err == 0)
+		exit(0);
+	else if (err == 1)
+		quit("Memory allocation failed (1; fdf structures)");
+	else if (err == 1.5)
+		quit("Invalid file or extension (program must be called with a .fdf)"); 
 	else if (err == 2)
-		quit("Error occured inside mlx functions");
+		quit("Memory allocation failed (2; parsing)");
+	else if (err == 2.5)
+		quit("Invalid map (width and height must be greater than 1)");
+	else if (err == 3)
+		quit("Memory allocation failed (3; positions)");
+	else if (err >= 4)
+		quit("Error occured inside mlx functions (4 - 6)");
 }
 
-void	quit_app(t_fdf *fdf, int err)
+void	quit_app(t_fdf *fdf, float err)
 {
-	if (fdf && fdf->img && fdf->img->mlx && fdf->img->img)
-		mlx_destroy_image(fdf->img->mlx, fdf->img->img);
-	if (fdf && fdf->img && fdf->img->mlx && fdf->img->mlx_win)
-		mlx_destroy_window(fdf->img->mlx, fdf->img->mlx_win);
-	if (fdf && fdf->img && fdf->img->mlx)
-		mlx_destroy_display(fdf->img->mlx);
-	if (fdf && fdf->map)
-		freetab_ext((void **)fdf->map->data, fdf->map->height);
-	if (fdf && fdf->pos && fdf->map)
-		freetab_in((void **)fdf->pos, fdf->map->height);
-	if (fdf && fdf->map)
-		free(fdf->map);
-	if (fdf && fdf->pos)
-		free(fdf->pos);
-	if (fdf && fdf->opts)
-		free(fdf->opts);
-	if (fdf && fdf->img)
+	if (err >= 6 || err == 0)
 	{
-		free(fdf->img->mlx);
-		free(fdf->img);
+		mlx_destroy_image(fdf->img->mlx, fdf->img->img);
+		mlx_destroy_window(fdf->img->mlx, fdf->img->mlx_win);
+		mlx_destroy_display(fdf->img->mlx);
 	}
-	free(fdf);
-	if (err != 0)
-		err_code(err);
-	else
-		exit(0);
+	if (err >= 4 || err == 0)
+		free(fdf->img->mlx);
+	if (err >= 3 || err == 0)
+		freetab_in((void **)fdf->pos, fdf->map->allocs);
+	if (err >= 2 || err == 0)
+		freetab((void **)fdf->map->data, fdf->map->height);
+	if (err >= 1 || err == 0)
+	{
+		free(fdf->pos);
+		free(fdf->img);
+		free(fdf->opts);
+		free(fdf->map);
+		free(fdf);
+	}
+	err_code(err);
 }
