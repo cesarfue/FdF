@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:40:04 by cefuente          #+#    #+#             */
-/*   Updated: 2024/02/06 16:44:09 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/07 13:28:06 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	err_code(float err)
 	else if (err == 1)
 		quit("Memory allocation failed (1; fdf structures)");
 	else if (err == 1.5)
-		quit("Invalid file or extension (program must be called with a .fdf)"); 
+		quit("Invalid file or extension (program must be called with a .fdf)");
 	else if (err == 2)
 		quit("Memory allocation failed (2; parsing)");
 	else if (err == 2.5)

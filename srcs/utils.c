@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:20:35 by cesar             #+#    #+#             */
-/*   Updated: 2024/02/06 14:51:29 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/07 13:27:51 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,3 @@ char	*check_file(t_fdf *fdf, char *str)
 	quit_app(fdf, 0.5);
 	return (NULL);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:18:31 by cefuente          #+#    #+#             */
-/*   Updated: 2024/02/06 17:19:56 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/07 13:29:02 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,10 @@ int	main(int argc, char **argv)
 	fdf->opts = calloc_er(1, sizeof(t_opts), fdf, 1);
 	fdf->map->file = check_file(fdf, argv[1]);
 	fdf->map->height = 0;
-	fdf->map->width =__INT_MAX__; 
+	fdf->map->width = __INT_MAX__;
 	fdf->map->data = NULL;
 	cartographer(fdf);
-	if (fdf->map->height <= 1 ||  fdf->map->width <= 1
+	if (fdf->map->height <= 1 || fdf->map->width <= 1
 		|| !fdf->map->height || !fdf->map->width)
 		quit_app(fdf, 2.5);
 	init_opts(fdf);
