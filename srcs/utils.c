@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:20:35 by cesar             #+#    #+#             */
-/*   Updated: 2024/02/07 13:27:51 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:23:04 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,10 @@ char	*check_file(t_fdf *fdf, char *str)
 		return (str);
 	quit_app(fdf, 0.5);
 	return (NULL);
+}
+
+int	little_red_cross(t_fdf *fdf)
+{
+	quit_app(fdf, 0);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:18:31 by cefuente          #+#    #+#             */
-/*   Updated: 2024/02/07 13:29:02 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:23:51 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	init_mlx(t_fdf *fdf)
 	if (!fdf->img->addr)
 		quit_app(fdf, 7);
 	is_that_bob_ross(fdf);
-	mlx_hook(fdf->img->mlx_win, 17, 0, (void *)quit_app, fdf);
+	mlx_hook(fdf->img->mlx_win, 17, 0, little_red_cross, fdf);
 	mlx_hook(fdf->img->mlx_win, 2, 1L << 0, key_events, fdf);
 	mlx_mouse_hook(fdf->img->mlx_win, mouse_events, fdf);
 	mlx_loop(fdf->img->mlx);

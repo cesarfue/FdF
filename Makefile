@@ -6,7 +6,7 @@
 #    By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/15 12:34:28 by cesar             #+#    #+#              #
-#    Updated: 2024/02/02 16:00:06 by cefuente         ###   ########.fr        #
+#    Updated: 2024/02/07 13:53:33 by cefuente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@ NAME			=	FdF
 
 SRCS_LIST			=	main.c parsing.c draw.c positions.c \
 	colors.c key_events.c utils.c mouse_events.c exit.c \
+
+HEADER			=	includes/fdf.h
 
 SRCS_DIR		=	srcs/
 OBJS_DIR		=	objs/
@@ -43,7 +45,7 @@ $(NAME)		:	mlx libft $(OBJS)
 	$(CC) $(FLAGS) $(OBJS) -no-pie -L$(LIBFT_DIR) -L$(MLX_DIR) -L$(USRLIB_DIR) -l$(LIBFT_LINK) -l$(MLX_LINKS) $(USRLIB_LINKS) -o $(NAME)
 
 
-$(OBJS_DIR)%.o	:	%.c
+$(OBJS_DIR)%.o	:	%.c $(HEADER)
 	mkdir -p $(dir $@)
 	$(CC) $(FLAGS) -I$(INCLUDES_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) -I$(USRLIB_DIR) -c $< -o $@
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:10:13 by cesar             #+#    #+#             */
-/*   Updated: 2024/02/06 14:37:00 by cesar            ###   ########.fr       */
+/*   Updated: 2024/02/07 16:23:31 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,6 @@ void	freetab_in(void **tab, int size);
 void	freetab(void **tab, int size);
 void	*calloc_er(size_t nmemb, size_t size, t_fdf *fdf, float err);
 char	*check_file(t_fdf *fdf, char *str);
-
+int		little_red_cross(t_fdf *fdf);
 
 #endif
